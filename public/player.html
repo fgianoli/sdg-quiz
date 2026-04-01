@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>SDG 15.3.1 QUIZ</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;700;900&display=swap');
+  :root{--bg:#0a0a1a;--card:#12122a;--teal:#00e5ff;--orange:#ff6b35;--green:#00ff87;--red:#ff3860;--purple:#a855f7;--gold:#ffd700;--text:#e0e0ff;--dim:#667}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;-webkit-user-select:none;user-select:none}
+
+  /* Animated background */
+  body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 20% 50%,rgba(0,229,255,.05),transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(168,85,247,.05),transparent 50%),radial-gradient(ellipse at 50% 80%,rgba(0,255,135,.03),transparent 50%);z-index:0;pointer-events:none}
+
+  /* JOIN SCREEN */
+  .join-screen{text-align:center;padding:20px;width:100%;max-width:400px;position:relative;z-index:1}
+  .join-screen .logo{font-family:'Orbitron',sans-serif;font-size:1.8em;font-weight:900;background:linear-gradient(90deg,var(--teal),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:4px}
+  .join-screen .subtitle{color:var(--dim);font-size:.75em;margin-bottom:28px;letter-spacing:1px;text-transform:uppercase}
+  .join-input{width:100%;padding:16px;font-size:1.2em;border:2px solid rgba(0,229,255,.3);border-radius:14px;background:rgba(255,255,255,.05);color:#fff;text-align:center;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s}
+  .join-input::placeholder{color:#444}
+  .join-input:focus{border-color:var(--teal);box-shadow:0 0 20px rgba(0,229,255,.15)}
+  .join-btn{width:100%;margin-top:16px;padding:16px;font-size:1.2em;font-weight:900;background:linear-gradient(135deg,var(--teal),#0099cc);color:var(--bg);border:none;border-radius:14px;cursor:pointer;font-family:'Orbitron',sans-serif;text-transform:uppercase;letter-spacing:2px;transition:all .15s}
+  .join-btn:active{transform:scale(.97);background:linear-gradient(135deg,var(--green),var(--teal))}
+
+  /* WAIT SCREEN */
+  .wait-screen{text-align:center;padding:20px;position:relative;z-index:1}
+  .wait-screen h2{font-family:'Orbitron',sans-serif;font-size:1.2em;color:var(--teal);text-transform:uppercase;letter-spacing:2px}
+  .wait-screen .team-name{font-family:'Orbitron',sans-serif;font-size:2em;font-weight:900;margin:16px 0;background:linear-gradient(90deg,var(--teal),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .wait-screen p{color:var(--dim);font-size:.9em}
+  .pulse-dot{display:inline-block;width:12px;height:12px;background:var(--teal);border-radius:50%;animation:pulseDot 1.5s infinite}
+  @keyframes pulseDot{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+
+  /* BUZZER SCREEN */
+  .buzzer-screen{width:100%;height:100vh;height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;position:relative;z-index:1}
+  .q-info{text-align:center;margin-bottom:12px;font-size:.85em;color:var(--dim);font-family:'Orbitron',sans-serif;letter-spacing:1px}
+  .buzzer-big{width:min(80vw,300px);height:min(80vw,300px);border-radius:50%;border:none;font-size:2em;font-weight:900;cursor:pointer;font-family:'Orbitron',sans-serif;color:#fff;position:relative;overflow:hidden;transition:transform .1s;display:flex;align-items:center;justify-content:center;text-transform:uppercase;letter-spacing:3px}
+  .buzzer-big.ready{background:radial-gradient(circle at 40% 40%,var(--green),#00996b);animation:breathe 2s infinite;box-shadow:0 0 60px rgba(0,255,135,.2)}
+  .buzzer-big.ready:active{transform:scale(.92);animation:none}
+  .buzzer-big.buzzed{background:radial-gradient(circle at 40% 40%,var(--orange),#cc4400);animation:none;box-shadow:0 0 60px rgba(255,107,53,.3)}
+  .buzzer-big.disabled{background:linear-gradient(135deg,#222,#333);color:#555;cursor:default;box-shadow:none}
+  .buzzer-big.correct-flash{background:radial-gradient(circle at 40% 40%,var(--green),#00cc6a);animation:bigPulse .5s;box-shadow:0 0 80px rgba(0,255,135,.4)}
+  .buzzer-big.wrong-flash{background:radial-gradient(circle at 40% 40%,var(--red),#cc2040);animation:bigShake .5s;box-shadow:0 0 80px rgba(255,56,96,.4)}
+  @keyframes breathe{0%,100%{box-shadow:0 0 40px rgba(0,255,135,.2)}50%{box-shadow:0 0 80px rgba(0,255,135,.4)}}
+  @keyframes bigPulse{0%{transform:scale(1)}50%{transform:scale(1.08)}100%{transform:scale(1)}}
+  @keyframes bigShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+
+  .buzz-rank{margin-top:16px;font-family:'Orbitron',sans-serif;font-size:1.4em;font-weight:900;text-align:center}
+  .buzz-rank .rank-num{font-size:2em;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+  /* FEEDBACK */
+  .feedback-bar{position:fixed;bottom:0;left:0;width:100%;padding:16px;text-align:center;font-weight:700;font-size:1em;font-family:'Orbitron',sans-serif;letter-spacing:1px;z-index:10}
+  .feedback-bar.correct{background:linear-gradient(90deg,rgba(0,255,135,.9),rgba(0,204,106,.9));color:var(--bg)}
+  .feedback-bar.wrong{background:linear-gradient(90deg,rgba(255,56,96,.9),rgba(204,32,64,.9));color:#fff}
+  .feedback-bar.waiting{background:rgba(30,30,50,.95);color:var(--dim)}
+
+  /* COUNTDOWN */
+  .countdown-overlay{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.9);z-index:100}
+  .countdown-num{font-family:'Orbitron',sans-serif;font-size:10em;font-weight:900;background:linear-gradient(135deg,var(--teal),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:countPop .8s ease}
+  @keyframes countPop{0%{transform:scale(2);opacity:0}50%{transform:scale(1);opacity:1}100%{transform:scale(.9);opacity:.8}}
+
+  /* SCORE */
+  .my-score{position:fixed;top:12px;right:16px;background:rgba(0,229,255,.1);border:1px solid rgba(0,229,255,.2);padding:6px 16px;border-radius:20px;font-size:.85em;font-weight:700;font-family:'Orbitron',sans-serif;color:var(--teal);z-index:10}
+
+  .hide{display:none!important}
+</style>
+</head>
+<body>
+
+<div id="joinScreen" class="join-screen">
+  <div class="logo">SDG 15.3.1</div>
+  <div class="subtitle">QUIZ</div>
+  <input class="join-input" id="nameInput" placeholder="Your team name..." maxlength="30" autocomplete="off">
+  <button class="join-btn" id="joinBtn" onclick="joinTeam()">JOIN</button>
+</div>
+
+<div id="waitScreen" class="wait-screen hide">
+  <h2>You're in!</h2>
+  <div class="team-name" id="myTeamName"></div>
+  <p>Waiting for the game to start <span class="pulse-dot"></span></p>
+</div>
+
+<div id="buzzerScreen" class="buzzer-screen hide">
+  <div class="my-score" id="myScore">0 pts</div>
+  <div class="q-info" id="qInfo"></div>
+  <button class="buzzer-big disabled" id="buzzerBtn" onclick="buzz()">WAIT</button>
+  <div class="buzz-rank" id="buzzRank"></div>
+</div>
+
+<div id="countdownOverlay" class="countdown-overlay hide">
+  <div class="countdown-num" id="countdownNum"></div>
+</div>
+
+<div id="feedbackBar" class="feedback-bar hide"></div>
+
+<script>
+const WS_URL = (location.protocol === 'https:' ? 'wss://' : 'ws://') + location.host;
+let ws, myId, myName, myScore = 0, hasBuzzed = false, myRank = 0;
+
+function connect() {
+  ws = new WebSocket(WS_URL);
+  ws.onopen = () => {};
+  ws.onmessage = (e) => handleMsg(JSON.parse(e.data));
+  ws.onclose = () => setTimeout(connect, 2000);
+}
+
+function joinTeam() {
+  const name = document.getElementById('nameInput').value.trim();
+  if (!name) { document.getElementById('nameInput').focus(); return; }
+  ws.send(JSON.stringify({ type: 'join-team', name }));
+}
+
+document.getElementById('nameInput').addEventListener('keydown', e => { if(e.key==='Enter') joinTeam(); });
+
+function buzz() {
+  if (hasBuzzed) return;
+  hasBuzzed = true;
+  ws.send(JSON.stringify({ type: 'buzz' }));
+  const btn = document.getElementById('buzzerBtn');
+  btn.className = 'buzzer-big buzzed';
+  btn.textContent = 'BUZZED!';
+  if (navigator.vibrate) navigator.vibrate(100);
+}
+
+function handleMsg(msg) {
+  switch(msg.type) {
+    case 'joined':
+      myId = msg.teamId;
+      myName = msg.name;
+      document.getElementById('joinScreen').classList.add('hide');
+      document.getElementById('waitScreen').classList.remove('hide');
+      document.getElementById('myTeamName').textContent = myName;
+      break;
+
+    case 'game-started':
+      document.getElementById('waitScreen').classList.add('hide');
+      document.getElementById('buzzerScreen').classList.remove('hide');
+      break;
+
+    case 'countdown':
+      showCountdown(msg.seconds);
+      break;
+
+    case 'question':
+      hasBuzzed = false;
+      myRank = 0;
+      document.getElementById('buzzerScreen').classList.remove('hide');
+      document.getElementById('waitScreen').classList.add('hide');
+      document.getElementById('feedbackBar').classList.add('hide');
+      document.getElementById('qInfo').textContent = 'Q' + msg.num + '/' + msg.total + ' — ' + msg.points + ' pts';
+      const btn = document.getElementById('buzzerBtn');
+      btn.className = 'buzzer-big ready';
+      btn.textContent = 'BUZZ!';
+      document.getElementById('buzzRank').innerHTML = '';
+      updateMyScore(msg.teams);
+      break;
+
+    case 'buzz-update':
+      const myBuzz = msg.buzzOrder.find(b => b.name === myName);
+      if (myBuzz) {
+        const rank = msg.buzzOrder.indexOf(myBuzz) + 1;
+        myRank = rank;
+        document.getElementById('buzzRank').innerHTML = '<span class="rank-num">#' + rank + '</span><br>' + (rank === 1 ? 'First!' : 'in line');
+      }
+      break;
+
+    case 'first-buzz':
+      if (!hasBuzzed) {
+        const b = document.getElementById('buzzerBtn');
+        b.className = 'buzzer-big disabled';
+        b.textContent = msg.teamName + ' buzzed first';
+      }
+      break;
+
+    case 'wrong-pass':
+      if (myRank > 0) {
+        const newBuzz = msg.buzzOrder.find(b => b.name === myName);
+        if (newBuzz) {
+          const newRank = msg.buzzOrder.indexOf(newBuzz) + 1;
+          myRank = newRank;
+          document.getElementById('buzzRank').innerHTML = '<span class="rank-num">#' + newRank + '</span><br>' + (newRank === 1 ? 'Your turn!' : 'in line');
+        } else {
+          myRank = 0;
+        }
+      }
+      break;
+
+    case 'reveal':
+      const fb = document.getElementById('feedbackBar');
+      fb.classList.remove('hide');
+      const bb = document.getElementById('buzzerBtn');
+      if (msg.isCorrect && msg.winnerName === myName) {
+        fb.className = 'feedback-bar correct';
+        fb.textContent = 'CORRECT! +' + (msg.points || 10) + ' pts';
+        bb.className = 'buzzer-big correct-flash';
+      } else {
+        fb.className = 'feedback-bar ' + (msg.winnerName ? 'waiting' : 'wrong');
+        fb.textContent = msg.winnerName ? (msg.winnerName + ' got it right!') : 'No one got it right';
+        if (hasBuzzed && msg.winnerName !== myName) bb.className = 'buzzer-big wrong-flash';
+      }
+      updateMyScore(msg.teams);
+      break;
+
+    case 'finished':
+      const finFb = document.getElementById('feedbackBar');
+      finFb.classList.remove('hide');
+      finFb.className = 'feedback-bar correct';
+      const sorted = msg.teams;
+      const myT = sorted.find(t => t.id === myId);
+      const myPos = sorted.indexOf(myT) + 1;
+      finFb.textContent = 'GAME OVER! #' + myPos + ' — ' + (myT?.score || 0) + ' pts';
+      const finBtn = document.getElementById('buzzerBtn');
+      finBtn.className = 'buzzer-big disabled';
+      finBtn.textContent = '#' + myPos;
+      break;
+
+    case 'reset':
+      myScore = 0;
+      hasBuzzed = false;
+      document.getElementById('buzzerScreen').classList.add('hide');
+      document.getElementById('waitScreen').classList.remove('hide');
+      document.getElementById('feedbackBar').classList.add('hide');
+      break;
+
+    case 'teams-updated':
+      updateMyScore(msg.teams);
+      break;
+  }
+}
+
+function updateMyScore(teams) {
+  if (!teams) return;
+  const me = teams.find(t => t.id === myId);
+  if (me) {
+    myScore = me.score;
+    document.getElementById('myScore').textContent = myScore + ' pts';
+  }
+}
+
+function showCountdown(sec) {
+  const overlay = document.getElementById('countdownOverlay');
+  const num = document.getElementById('countdownNum');
+  overlay.classList.remove('hide');
+  let count = sec;
+  num.textContent = count;
+  const iv = setInterval(() => {
+    count--;
+    if (count <= 0) {
+      clearInterval(iv);
+      overlay.classList.add('hide');
+    } else {
+      num.textContent = count;
+      num.style.animation = 'none';
+      void num.offsetHeight;
+      num.style.animation = 'countPop .8s ease';
+    }
+  }, 1000);
+}
+
+connect();
+</script>
+</body>
+</html>

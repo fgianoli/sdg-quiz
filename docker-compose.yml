@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  sdg-quiz:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sdg-quiz
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - QUESTIONS_PER_GAME=15

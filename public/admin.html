@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDG 15.3.1 QUIZ — Admin</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;600;700;900&display=swap');
+  :root{--bg:#0a0a1a;--card:#12122a;--teal:#00e5ff;--orange:#ff6b35;--green:#00ff87;--red:#ff3860;--purple:#a855f7;--gold:#ffd700;--text:#e0e0ff;--dim:#667}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+  /* HEADER */
+  .header{background:linear-gradient(135deg,#0f0f2e,#1a1a3e);border-bottom:2px solid var(--teal);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+  .header h1{font-family:'Orbitron',sans-serif;font-size:1.3em;background:linear-gradient(90deg,var(--teal),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .header .phase-badge{padding:6px 16px;border-radius:20px;font-size:.8em;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+  .phase-lobby{background:rgba(0,229,255,.15);color:var(--teal);border:1px solid var(--teal)}
+  .phase-buzzing{background:rgba(0,255,135,.15);color:var(--green);border:1px solid var(--green);animation:pulseBorder 1s infinite}
+  .phase-answering{background:rgba(255,107,53,.15);color:var(--orange);border:1px solid var(--orange)}
+  .phase-reveal{background:rgba(168,85,247,.15);color:var(--purple);border:1px solid var(--purple)}
+  .phase-finished{background:rgba(255,215,0,.15);color:var(--gold);border:1px solid var(--gold)}
+  @keyframes pulseBorder{0%,100%{box-shadow:0 0 5px rgba(0,255,135,.3)}50%{box-shadow:0 0 20px rgba(0,255,135,.6)}}
+
+  /* LANG SELECTOR */
+  .lang-bar{display:flex;gap:8px;align-items:center}
+  .lang-bar label{font-size:.75em;color:var(--dim);text-transform:uppercase;letter-spacing:1px}
+  .lang-bar select{background:var(--card);color:var(--text);border:1px solid #333;border-radius:8px;padding:4px 10px;font-size:.85em;cursor:pointer}
+
+  /* LAYOUT */
+  .main{display:grid;grid-template-columns:1fr 320px;gap:16px;padding:16px;height:calc(100vh - 56px)}
+  .left-panel{display:flex;flex-direction:column;gap:16px;overflow:auto}
+  .right-panel{display:flex;flex-direction:column;gap:16px;overflow:auto}
+
+  /* CARDS */
+  .card{background:var(--card);border:1px solid #222;border-radius:16px;padding:20px;position:relative;overflow:hidden}
+  .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--purple))}
+  .card h3{font-family:'Orbitron',sans-serif;font-size:.75em;text-transform:uppercase;letter-spacing:2px;color:var(--dim);margin-bottom:12px}
+
+  /* QUESTION DISPLAY */
+  .q-display{flex:1}
+  .q-number{font-family:'Orbitron',sans-serif;font-size:3em;font-weight:900;background:linear-gradient(135deg,var(--teal),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+  .q-category{display:inline-block;padding:4px 12px;border-radius:12px;font-size:.7em;font-weight:700;background:rgba(168,85,247,.2);color:var(--purple);border:1px solid rgba(168,85,247,.3);margin:8px 0}
+  .q-text{font-size:1.3em;font-weight:700;line-height:1.4;margin:12px 0}
+  .q-text-secondary{font-size:1em;color:var(--dim);font-style:italic;margin-bottom:16px}
+  .q-options{list-style:none;display:grid;gap:8px}
+  .q-option{padding:12px 16px;border-radius:12px;border:2px solid #333;font-size:1em;display:flex;align-items:center;gap:10px;transition:all .2s}
+  .q-option .letter{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-family:'Orbitron',sans-serif;font-size:.85em;background:rgba(255,255,255,.05);flex-shrink:0}
+  .q-option.correct-highlight{border-color:var(--green);background:rgba(0,255,135,.08)}
+  .q-option.correct-highlight .letter{background:var(--green);color:var(--bg)}
+  .q-points{font-size:.85em;color:var(--orange);font-weight:700;margin-top:8px}
+  .q-explanation{margin-top:12px;padding:12px;border-radius:10px;background:rgba(0,229,255,.05);border:1px solid rgba(0,229,255,.15);font-size:.85em;color:var(--dim);line-height:1.5}
+
+  /* BUZZ ORDER */
+  .buzz-list{list-style:none}
+  .buzz-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;margin-bottom:6px;background:rgba(255,255,255,.03);border:1px solid #222;transition:all .3s}
+  .buzz-item.first{border-color:var(--gold);background:rgba(255,215,0,.08);animation:glowGold 2s infinite}
+  @keyframes glowGold{0%,100%{box-shadow:0 0 5px rgba(255,215,0,.1)}50%{box-shadow:0 0 15px rgba(255,215,0,.3)}}
+  .buzz-rank{font-family:'Orbitron',sans-serif;font-weight:900;font-size:1.2em;width:32px;text-align:center}
+  .buzz-rank.r1{color:var(--gold)}
+  .buzz-rank.r2{color:#c0c0c0}
+  .buzz-rank.r3{color:#cd7f32}
+  .buzz-name{flex:1;font-weight:600}
+  .buzz-time{font-family:'Orbitron',sans-serif;font-size:.75em;color:var(--dim)}
+  .buzz-color{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+
+  /* CONTROLS */
+  .controls{display:flex;flex-wrap:wrap;gap:8px}
+  .btn{padding:12px 20px;border-radius:12px;border:none;font-weight:700;font-size:.9em;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;text-transform:uppercase;letter-spacing:1px}
+  .btn:active{transform:scale(.96)}
+  .btn-start{background:linear-gradient(135deg,var(--green),#00cc6a);color:var(--bg);flex:1}
+  .btn-correct{background:linear-gradient(135deg,var(--green),#00cc6a);color:var(--bg)}
+  .btn-wrong{background:linear-gradient(135deg,var(--red),#cc2040);color:#fff}
+  .btn-next{background:linear-gradient(135deg,var(--teal),#0099cc);color:var(--bg);flex:1}
+  .btn-skip{background:rgba(255,255,255,.08);color:var(--dim);border:1px solid #333}
+  .btn-reset{background:rgba(255,56,96,.1);color:var(--red);border:1px solid rgba(255,56,96,.3)}
+  .btn:disabled{opacity:.3;cursor:not-allowed;transform:none}
+
+  /* LEADERBOARD */
+  .lb-entry{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;margin-bottom:4px;background:rgba(255,255,255,.02);transition:all .3s}
+  .lb-pos{font-family:'Orbitron',sans-serif;font-weight:900;width:28px;text-align:center;font-size:.85em}
+  .lb-pos.p1{color:var(--gold)}
+  .lb-pos.p2{color:#c0c0c0}
+  .lb-pos.p3{color:#cd7f32}
+  .lb-color{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+  .lb-name{flex:1;font-weight:600;font-size:.85em}
+  .lb-score{font-family:'Orbitron',sans-serif;font-weight:700;font-size:.9em;color:var(--teal)}
+  .lb-connected{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+  .lb-connected.online{background:var(--green)}
+  .lb-connected.offline{background:var(--red)}
+
+  /* LOBBY */
+  .lobby-view{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px}
+  .lobby-icon{font-size:5em;margin-bottom:16px;animation:float 3s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .lobby-title{font-family:'Orbitron',sans-serif;font-size:2em;font-weight:900;background:linear-gradient(90deg,var(--teal),var(--green),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+  .lobby-sub{color:var(--dim);margin-bottom:24px}
+  .team-count{font-family:'Orbitron',sans-serif;font-size:3em;font-weight:900;color:var(--teal)}
+  .team-count-label{font-size:.85em;color:var(--dim);margin-bottom:24px}
+
+  /* FINISHED */
+  .podium{display:flex;align-items:flex-end;justify-content:center;gap:12px;padding:20px}
+  .podium-spot{text-align:center;border-radius:12px 12px 0 0;padding:12px 16px;min-width:80px}
+  .podium-spot.first{background:linear-gradient(180deg,rgba(255,215,0,.2),rgba(255,215,0,.05));height:160px;border:1px solid rgba(255,215,0,.3)}
+  .podium-spot.second{background:linear-gradient(180deg,rgba(192,192,192,.2),rgba(192,192,192,.05));height:120px;border:1px solid rgba(192,192,192,.3)}
+  .podium-spot.third{background:linear-gradient(180deg,rgba(205,127,50,.2),rgba(205,127,50,.05));height:90px;border:1px solid rgba(205,127,50,.3)}
+  .podium-trophy{font-size:2em}
+  .podium-name{font-weight:700;font-size:.85em;margin-top:4px}
+  .podium-score{font-family:'Orbitron',sans-serif;font-size:.75em;color:var(--dim)}
+
+  /* COUNTDOWN */
+  .countdown-overlay{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.9);z-index:100}
+  .countdown-num{font-family:'Orbitron',sans-serif;font-size:12em;font-weight:900;background:linear-gradient(135deg,var(--teal),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:countPop .8s ease}
+  @keyframes countPop{0%{transform:scale(2);opacity:0}50%{transform:scale(1);opacity:1}100%{transform:scale(.9);opacity:.8}}
+
+  .hide{display:none!important}
+
+  /* Scrollbar */
+  ::-webkit-scrollbar{width:6px}
+  ::-webkit-scrollbar-track{background:transparent}
+  ::-webkit-scrollbar-thumb{background:#333;border-radius:3px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>SDG 15.3.1 QUIZ</h1>
+  <div>
+    <span class="phase-badge phase-lobby" id="phaseBadge">LOBBY</span>
+  </div>
+  <div class="lang-bar">
+    <label>2nd lang</label>
+    <select id="langSelect" onchange="setLang(this.value)">
+      <option value="ru">Russian</option>
+      <option value="tr">Turkish</option>
+    </select>
+  </div>
+</div>
+
+<div class="main">
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+    <!-- LOBBY VIEW -->
+    <div id="lobbyView" class="card lobby-view">
+      <div class="lobby-icon">🌍</div>
+      <div class="lobby-title">SDG 15.3.1 QUIZ</div>
+      <div class="lobby-sub">UNCCD Regional Capacity Building Workshop</div>
+      <div class="team-count" id="teamCount">0</div>
+      <div class="team-count-label">teams connected</div>
+      <button class="btn btn-start" id="startBtn" onclick="startGame()">START GAME</button>
+    </div>
+
+    <!-- QUESTION VIEW -->
+    <div id="questionView" class="card q-display hide">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px">
+        <div class="q-number" id="qNum">Q1</div>
+        <div>
+          <span class="q-category" id="qCat"></span>
+          <div class="q-points" id="qPts"></div>
+        </div>
+      </div>
+      <div class="q-text" id="qText"></div>
+      <div class="q-text-secondary" id="qTextSecondary"></div>
+      <ol class="q-options" id="qOptions"></ol>
+      <div class="q-explanation hide" id="qExplanation"></div>
+    </div>
+
+    <!-- CONTROLS -->
+    <div class="card" id="controlsCard">
+      <h3>Controls</h3>
+      <div class="controls" id="controlsArea">
+        <!-- Dynamic buttons -->
+      </div>
+    </div>
+
+    <!-- FINISHED VIEW -->
+    <div id="finishedView" class="card hide">
+      <h3>Final Results</h3>
+      <div class="podium" id="podium"></div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+    <!-- BUZZ ORDER -->
+    <div class="card" id="buzzCard">
+      <h3>Buzz Order</h3>
+      <div id="buzzList" style="color:var(--dim);font-size:.85em">Waiting for buzzes...</div>
+    </div>
+
+    <!-- LEADERBOARD -->
+    <div class="card" style="flex:1;overflow:auto">
+      <h3>Leaderboard</h3>
+      <div id="leaderboard"></div>
+    </div>
+  </div>
+</div>
+
+<div id="countdownOverlay" class="countdown-overlay hide">
+  <div class="countdown-num" id="countdownNum"></div>
+</div>
+
+<script>
+const WS_URL = (location.protocol === 'https:' ? 'wss://' : 'ws://') + location.host;
+let ws;
+let state = { phase: 'lobby', teams: [], buzzOrder: [], currentQ: -1, questions: [], totalQuestions: 0, secondLang: 'ru' };
+
+function connect() {
+  ws = new WebSocket(WS_URL);
+  ws.onopen = () => { ws.send(JSON.stringify({ type: 'admin-join' })); };
+  ws.onmessage = (e) => handleMsg(JSON.parse(e.data));
+  ws.onclose = () => setTimeout(connect, 2000);
+}
+
+function handleMsg(msg) {
+  switch(msg.type) {
+    case 'admin-state':
+      state.teams = msg.teams || [];
+      state.phase = msg.phase;
+      state.currentQ = msg.currentQ;
+      state.questions = msg.questions || [];
+      state.buzzOrder = msg.buzzOrder || [];
+      state.secondLang = msg.secondLang || 'ru';
+      state.totalQuestions = msg.totalQuestions || state.questions.length;
+      document.getElementById('langSelect').value = state.secondLang;
+      renderAll();
+      break;
+
+    case 'game-started':
+      state.phase = 'countdown';
+      state.totalQuestions = msg.totalQuestions;
+      renderPhase();
+      break;
+
+    case 'countdown':
+      showCountdown(msg.seconds);
+      break;
+
+    case 'question':
+      state.phase = 'buzzing';
+      state.currentQ = msg.num - 1;
+      state.buzzOrder = [];
+      state.teams = msg.teams || state.teams;
+      // Store current question data
+      state.currentQuestion = {
+        num: msg.num,
+        total: msg.total,
+        question: msg.question,
+        options: msg.options,
+        category: msg.category,
+        points: msg.points,
+        secondLang: msg.secondLang
+      };
+      renderAll();
+      break;
+
+    case 'buzz-update':
+      state.buzzOrder = msg.buzzOrder;
+      if (state.buzzOrder.length === 1) state.phase = 'answering';
+      renderBuzzOrder();
+      renderControls();
+      renderPhase();
+      break;
+
+    case 'first-buzz':
+      state.phase = 'answering';
+      renderPhase();
+      renderControls();
+      break;
+
+    case 'wrong-pass':
+      state.buzzOrder = msg.buzzOrder;
+      renderBuzzOrder();
+      break;
+
+    case 'reveal':
+      state.phase = 'reveal';
+      state.teams = msg.teams || state.teams;
+      state.revealData = { correct: msg.correct, explanation: msg.explanation, winnerName: msg.winnerName, isCorrect: msg.isCorrect };
+      renderAll();
+      break;
+
+    case 'finished':
+      state.phase = 'finished';
+      state.teams = msg.teams || state.teams;
+      renderAll();
+      break;
+
+    case 'reset':
+      state.phase = 'lobby';
+      state.currentQ = -1;
+      state.buzzOrder = [];
+      state.teams.forEach(t => t.score = 0);
+      renderAll();
+      break;
+
+    case 'teams-updated':
+      state.teams = msg.teams || state.teams;
+      renderLeaderboard();
+      document.getElementById('teamCount').textContent = state.teams.length;
+      break;
+
+    case 'lang-changed':
+      state.secondLang = msg.lang;
+      document.getElementById('langSelect').value = msg.lang;
+      break;
+  }
+}
+
+function renderAll() {
+  renderPhase();
+  renderQuestion();
+  renderBuzzOrder();
+  renderLeaderboard();
+  renderControls();
+  renderLobby();
+  renderFinished();
+}
+
+function renderPhase() {
+  const badge = document.getElementById('phaseBadge');
+  const phaseMap = { lobby: 'LOBBY', countdown: 'COUNTDOWN', buzzing: 'BUZZING', answering: 'ANSWERING', reveal: 'REVEAL', finished: 'FINISHED' };
+  badge.textContent = phaseMap[state.phase] || state.phase.toUpperCase();
+  badge.className = 'phase-badge phase-' + (state.phase === 'countdown' ? 'buzzing' : state.phase);
+}
+
+function renderLobby() {
+  const lobbyView = document.getElementById('lobbyView');
+  const questionView = document.getElementById('questionView');
+  const finishedView = document.getElementById('finishedView');
+  if (state.phase === 'lobby') {
+    lobbyView.classList.remove('hide');
+    questionView.classList.add('hide');
+    finishedView.classList.add('hide');
+    document.getElementById('teamCount').textContent = state.teams.length;
+    document.getElementById('startBtn').disabled = state.teams.length < 1;
+  } else if (state.phase === 'finished') {
+    lobbyView.classList.add('hide');
+    questionView.classList.add('hide');
+    finishedView.classList.remove('hide');
+  } else {
+    lobbyView.classList.add('hide');
+    questionView.classList.remove('hide');
+    finishedView.classList.add('hide');
+  }
+}
+
+function renderQuestion() {
+  if (!state.currentQuestion || state.phase === 'lobby' || state.phase === 'finished') return;
+  const q = state.currentQuestion;
+  document.getElementById('qNum').textContent = 'Q' + q.num;
+  document.getElementById('qCat').textContent = q.category?.en || q.category || '';
+  document.getElementById('qPts').textContent = q.points + ' points';
+  document.getElementById('qText').textContent = q.question?.en || q.question || '';
+  const sl = state.secondLang || 'ru';
+  const secondText = q.question?.[sl] || '';
+  document.getElementById('qTextSecondary').textContent = secondText;
+
+  const optEl = document.getElementById('qOptions');
+  const letters = ['A','B','C','D'];
+  const options = q.options?.en || q.options || [];
+  const optionsSecond = q.options?.[sl] || [];
+  optEl.innerHTML = options.map((o, i) => {
+    const isCorrect = state.phase === 'reveal' && state.revealData && i === state.revealData.correct;
+    return `<li class="q-option ${isCorrect ? 'correct-highlight' : ''}">
+      <span class="letter">${letters[i]}</span>
+      <span>${o}${optionsSecond[i] ? '<br><em style="color:var(--dim);font-size:.85em">' + optionsSecond[i] + '</em>' : ''}</span>
+    </li>`;
+  }).join('');
+
+  const expEl = document.getElementById('qExplanation');
+  if (state.phase === 'reveal' && state.revealData) {
+    const exp = state.revealData.explanation;
+    const expText = exp?.en || exp || '';
+    const expSecond = exp?.[sl] || '';
+    expEl.innerHTML = '<strong>Answer:</strong> ' + letters[state.revealData.correct] + '<br>' + expText + (expSecond ? '<br><em style="color:var(--dim)">' + expSecond + '</em>' : '');
+    if (state.revealData.winnerName) {
+      expEl.innerHTML += '<br><strong style="color:var(--green)">Winner: ' + state.revealData.winnerName + '</strong>';
+    }
+    expEl.classList.remove('hide');
+  } else {
+    expEl.classList.add('hide');
+  }
+}
+
+function renderBuzzOrder() {
+  const el = document.getElementById('buzzList');
+  if (!state.buzzOrder || state.buzzOrder.length === 0) {
+    el.innerHTML = '<div style="color:var(--dim);font-size:.85em;padding:8px">Waiting for buzzes...</div>';
+    return;
+  }
+  el.innerHTML = state.buzzOrder.map((b, i) => {
+    const rankClass = i === 0 ? 'r1' : i === 1 ? 'r2' : i === 2 ? 'r3' : '';
+    return `<div class="buzz-item ${i === 0 ? 'first' : ''}">
+      <span class="buzz-rank ${rankClass}">#${i+1}</span>
+      <span class="buzz-color" style="background:${b.color || '#666'}"></span>
+      <span class="buzz-name">${b.name}</span>
+      <span class="buzz-time">${b.ms}ms</span>
+    </div>`;
+  }).join('');
+}
+
+function renderLeaderboard() {
+  const el = document.getElementById('leaderboard');
+  if (!state.teams || state.teams.length === 0) {
+    el.innerHTML = '<div style="color:var(--dim);font-size:.85em;padding:8px">No teams yet...</div>';
+    return;
+  }
+  const sorted = [...state.teams].sort((a,b) => b.score - a.score);
+  el.innerHTML = sorted.map((t, i) => {
+    const posClass = i === 0 ? 'p1' : i === 1 ? 'p2' : i === 2 ? 'p3' : '';
+    return `<div class="lb-entry">
+      <span class="lb-pos ${posClass}">${i+1}</span>
+      <span class="lb-color" style="background:${t.color}"></span>
+      <span class="lb-name">${t.name}</span>
+      <span class="lb-score">${t.score}</span>
+      <span class="lb-connected ${t.connected ? 'online' : 'offline'}"></span>
+    </div>`;
+  }).join('');
+}
+
+function renderControls() {
+  const area = document.getElementById('controlsArea');
+  switch(state.phase) {
+    case 'lobby':
+      area.innerHTML = '<button class="btn btn-start" onclick="startGame()" style="flex:1">START GAME</button>';
+      break;
+    case 'buzzing':
+      area.innerHTML = '<button class="btn btn-skip" onclick="skip()">SKIP QUESTION</button>';
+      break;
+    case 'answering':
+      area.innerHTML = `
+        <button class="btn btn-correct" onclick="markCorrect()" style="flex:1">CORRECT</button>
+        <button class="btn btn-wrong" onclick="markWrong()" style="flex:1">WRONG</button>
+        <button class="btn btn-skip" onclick="skip()">SKIP</button>`;
+      break;
+    case 'reveal':
+      const isLast = state.currentQuestion && state.currentQuestion.num >= state.currentQuestion.total;
+      area.innerHTML = isLast
+        ? '<button class="btn btn-next" style="flex:1" disabled>LAST QUESTION</button>'
+        : '<button class="btn btn-next" onclick="nextQ()" style="flex:1">NEXT QUESTION</button>';
+      break;
+    case 'finished':
+      area.innerHTML = '<button class="btn btn-reset" onclick="resetGame()" style="flex:1">NEW GAME</button>';
+      break;
+    default:
+      area.innerHTML = '';
+  }
+}
+
+function renderFinished() {
+  if (state.phase !== 'finished') return;
+  const sorted = [...state.teams].sort((a,b) => b.score - a.score);
+  const podium = document.getElementById('podium');
+  const trophies = ['🏆','🥈','🥉'];
+  const classes = ['first','second','third'];
+  // Show podium: 2nd, 1st, 3rd
+  const order = [1, 0, 2];
+  podium.innerHTML = order.map(idx => {
+    const t = sorted[idx];
+    if (!t) return '';
+    return `<div class="podium-spot ${classes[idx]}">
+      <div class="podium-trophy">${trophies[idx]}</div>
+      <div class="podium-name">${t.name}</div>
+      <div class="podium-score">${t.score} pts</div>
+    </div>`;
+  }).join('');
+}
+
+// ACTIONS
+function startGame() { ws.send(JSON.stringify({ type: 'start-game' })); }
+function nextQ() { ws.send(JSON.stringify({ type: 'next-question' })); }
+function markCorrect() { ws.send(JSON.stringify({ type: 'mark-correct' })); }
+function markWrong() { ws.send(JSON.stringify({ type: 'mark-wrong' })); }
+function skip() { ws.send(JSON.stringify({ type: 'skip' })); }
+function resetGame() { ws.send(JSON.stringify({ type: 'reset' })); }
+function setLang(lang) { ws.send(JSON.stringify({ type: 'set-lang', lang })); }
+
+function showCountdown(sec) {
+  const overlay = document.getElementById('countdownOverlay');
+  const num = document.getElementById('countdownNum');
+  overlay.classList.remove('hide');
+  let count = sec;
+  num.textContent = count;
+  const iv = setInterval(() => {
+    count--;
+    if (count <= 0) {
+      clearInterval(iv);
+      overlay.classList.add('hide');
+    } else {
+      num.textContent = count;
+      num.style.animation = 'none';
+      void num.offsetHeight;
+      num.style.animation = 'countPop .8s ease';
+    }
+  }, 1000);
+}
+
+connect();
+</script>
+</body>
+</html>

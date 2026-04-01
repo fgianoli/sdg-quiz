@@ -206,10 +206,9 @@ function handleMsg(msg) {
     }
 
     case 'first-buzz':
+      // Don't disable — other teams can still buzz and join the queue
       if (!hasBuzzed) {
-        const b = document.getElementById('buzzerBtn');
-        b.className = 'buzzer-big disabled';
-        b.textContent = msg.teamName + ' buzzed';
+        document.getElementById('buzzRank').innerHTML = '<div style="font-size:.6em;color:var(--dim)">' + msg.teamName + ' buzzed first — you can still buzz!</div>';
       }
       break;
 
@@ -282,6 +281,15 @@ function handleMsg(msg) {
       document.getElementById('waitScreen').classList.remove('hide');
       document.getElementById('feedbackBar').classList.add('hide');
       document.getElementById('myScore').textContent = '0 pts';
+      break;
+
+    case 'kicked':
+      myName = null; myId = null;
+      document.getElementById('buzzerScreen').classList.add('hide');
+      document.getElementById('waitScreen').classList.add('hide');
+      document.getElementById('feedbackBar').classList.add('hide');
+      document.getElementById('joinScreen').classList.remove('hide');
+      document.getElementById('nameInput').value = '';
       break;
 
     case 'teams-updated':

@@ -178,6 +178,21 @@ wss.on('connection', (ws) => {
         broadcastReveal(null, false);
         break;
 
+      case 'kick-team': {
+        const kickId = msg.teamId;
+        if (kickId && teams[kickId]) {
+          if (teams[kickId].ws) {
+            teams[kickId].ws.send(JSON.stringify({ type: 'kicked' }));
+            teams[kickId].ws.close();
+          }
+          delete teams[kickId];
+          // Remove from buzz order if present
+          buzzOrder = buzzOrder.filter(b => b.teamId !== kickId);
+          broadcast({ type: 'teams-updated', teams: getTeamsPublic() });
+        }
+        break;
+      }
+
       case 'reset':
         phase = 'lobby';
         currentQ = -1;
@@ -222,21 +237,30 @@ wss.on('connection', (ws) => {
           break;
         }
 
+        // Prevent duplicate names (if connected team with same name exists)
+        let finalName = name;
+        const connectedDupe = Object.values(teams).find(t => t.name === name && t.ws);
+        if (connectedDupe) {
+          let suffix = 2;
+          while (Object.values(teams).some(t => t.name === name + ' ' + suffix)) suffix++;
+          finalName = name + ' ' + suffix;
+        }
+
         // New team
         const id = 'team_' + (++idCounter);
         const color = COLORS[colorIndex % COLORS.length];
         colorIndex++;
         ws.role = 'player';
         ws.teamId = id;
-        teams[id] = { name, score: 0, ws, color };
-        ws.send(JSON.stringify({ type: 'joined', teamId: id, name, color }));
+        teams[id] = { name: finalName, score: 0, ws, color };
+        ws.send(JSON.stringify({ type: 'joined', teamId: id, name: finalName, color }));
         broadcastAdmin({ type: 'teams-updated', teams: getTeamsPublic() });
         broadcastPlayers({ type: 'teams-updated', teams: getTeamsPublic() });
         break;
       }
 
       case 'buzz': {
-        if (phase !== 'buzzing' || !ws.teamId || !teams[ws.teamId]) break;
+        if (!['buzzing','answering'].includes(phase) || !ws.teamId || !teams[ws.teamId]) break;
         if (buzzOrder.find(b => b.teamId === ws.teamId)) break; // already buzzed
         // Cap buzz queue at number of options (max 4 chances)
         const maxBuzzers = questions[currentQ]?.options?.en?.length || 4;

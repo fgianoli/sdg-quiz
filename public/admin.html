@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SDG 15.3.1 QUIZ — Admin</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Nunito:wght@400;600;700;800;900&display=swap');
   :root{--bg:#f0f2f5;--card:#ffffff;--teal:#0088aa;--orange:#e65100;--green:#1b8a2d;--red:#c62828;--purple:#6a1b9a;--gold:#f9a825;--text:#1a1a2e;--dim:#666;--border:#dde}
@@ -35,17 +36,17 @@
   .q-lang-ru{color:#1565c0;font-weight:600}
   .q-lang-tr{color:#c62828;font-weight:600}
   .q-lang-inline{display:flex;gap:16px;flex-wrap:wrap}
-  .q-options{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .q-option{padding:10px 14px;border-radius:10px;border:2px solid var(--border);font-size:.95em;display:flex;align-items:flex-start;gap:10px;transition:all .2s;background:#fafafa}
+  .q-options{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .q-option{padding:14px 16px;border-radius:12px;border:2px solid var(--border);font-size:1.05em;display:flex;align-items:flex-start;gap:12px;transition:all .2s;background:#fafafa}
   .q-option.clickable{cursor:pointer}
   .q-option.clickable:hover{border-color:#1565c0;background:#e3f2fd;transform:translateY(-2px);box-shadow:0 4px 12px rgba(21,101,192,.15)}
-  .q-option .letter{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-family:'Orbitron',sans-serif;font-size:.85em;background:#e8eaf6;color:#283593;flex-shrink:0}
+  .q-option .letter{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-family:'Orbitron',sans-serif;font-size:.95em;background:#e8eaf6;color:#283593;flex-shrink:0}
   .q-option.correct-highlight{border-color:var(--green);background:#e8f5e9}
   .q-option.correct-highlight .letter{background:var(--green);color:#fff}
   .q-option.wrong-highlight{border-color:var(--red);background:#ffebee}
   .q-option.wrong-highlight .letter{background:var(--red);color:#fff}
   .click-hint{text-align:center;padding:6px;font-size:.8em;color:#1565c0;font-weight:700;margin-bottom:6px;background:#e3f2fd;border-radius:8px;border:1px dashed #90caf9;grid-column:1/-1}
-  .q-option .opt-translations{margin-top:3px;font-size:.8em;line-height:1.4}
+  .q-option .opt-translations{margin-top:4px;font-size:.85em;line-height:1.4}
   .q-option .opt-translations .q-lang-ru,.q-option .opt-translations .q-lang-tr{display:inline}
   .q-points{font-size:.8em;color:var(--orange);font-weight:700;margin-top:4px}
   .q-explanation{margin-top:10px;padding:12px;border-radius:10px;background:#e3f2fd;border:1px solid #90caf9;font-size:.9em;color:#1a1a2e;line-height:1.5}
@@ -120,8 +121,14 @@
 
 <div class="header">
   <h1>SDG 15.3.1 QUIZ — ADMIN</h1>
-  <div><span class="phase-badge phase-lobby" id="phaseBadge">LOBBY</span></div>
+  <div style="display:flex;align-items:center;gap:12px">
+    <span id="progressText" style="font-size:.75em;color:rgba(255,255,255,.7);font-family:'Orbitron',sans-serif"></span>
+    <span class="phase-badge phase-lobby" id="phaseBadge">LOBBY</span>
+  </div>
   <div style="font-size:.75em;color:rgba(255,255,255,.7);letter-spacing:1px">EN + 🇷🇺 + 🇹🇷</div>
+</div>
+<div id="progressBar" style="height:3px;background:#0d47a1;position:relative">
+  <div id="progressFill" style="height:100%;background:var(--gold);width:0%;transition:width .5s ease"></div>
 </div>
 
 <div class="main">
@@ -130,6 +137,8 @@
       <div class="lobby-icon">🌍</div>
       <div class="lobby-title">SDG 15.3.1 QUIZ</div>
       <div class="lobby-sub">UNCCD Regional Capacity Building Workshop</div>
+      <div id="qrCode" style="margin:12px auto;background:#fff;padding:8px;border-radius:8px;display:inline-block"></div>
+      <div id="joinUrl" style="font-size:.8em;color:var(--dim);margin-bottom:12px;word-break:break-all"></div>
       <div class="team-count" id="teamCount">0</div>
       <div class="team-count-label">teams connected</div>
       <button class="btn btn-start" id="startBtn" onclick="startGame()">START GAME</button>
@@ -219,6 +228,7 @@ function handleMsg(msg) {
     case 'countdown':
       showCountdown(msg.seconds); break;
     case 'question':
+      _selectLock = false;
       state.phase = 'buzzing'; state.currentQ = msg.num-1; state.buzzOrder = []; state.teams = msg.teams||state.teams; state.revealData = null; state.lastAnswerResult = null; state.usedAnswers = [];
       state.correctIndex = (typeof msg.correct === 'number') ? msg.correct : -1;
       state.currentQuestion = { num: msg.num, total: msg.total, question: msg.question, options: msg.options, category: msg.category, points: msg.points };
@@ -236,6 +246,7 @@ function handleMsg(msg) {
       state.phase = 'answering'; state._answeringTeam = { name: msg.teamName, color: msg.teamColor };
       renderPhase(); renderControls(); renderAnsweringBanner(); renderQuestion(); break;
     case 'wrong-pass':
+      _selectLock = false;
       state.buzzOrder = msg.buzzOrder; state.phase = 'answering'; state._answeringTeam = { name: msg.nextTeam, color: msg.nextColor };
       state.lastAnswerResult = null;
       if (msg.usedAnswers) state.usedAnswers = msg.usedAnswers;
@@ -265,6 +276,18 @@ function renderPhase() {
   badge.textContent = map[state.phase] || state.phase.toUpperCase();
   const css = state.phase === 'countdown' ? 'buzzing' : state.phase === 'all-wrong' ? 'answering' : state.phase;
   badge.className = 'phase-badge phase-' + css;
+  // Progress bar
+  const pt = document.getElementById('progressText');
+  const pf = document.getElementById('progressFill');
+  if (state.currentQuestion && state.phase !== 'lobby') {
+    const num = state.currentQuestion.num || (state.currentQ + 1);
+    const total = state.currentQuestion.total || state.totalQuestions;
+    pt.textContent = num + ' / ' + total;
+    pf.style.width = ((num / total) * 100) + '%';
+  } else if (state.phase === 'lobby') {
+    pt.textContent = '';
+    pf.style.width = '0%';
+  }
 }
 
 function renderAnsweringBanner() {
@@ -386,7 +409,8 @@ function renderLeaderboard() {
   const sorted = [...state.teams].sort((a,b) => b.score - a.score);
   el.innerHTML = sorted.map((t, i) => {
     const pc = i===0?'p1':i===1?'p2':i===2?'p3':'';
-    return `<div class="lb-entry"><span class="lb-pos ${pc}">${i+1}</span><span class="lb-color" style="background:${t.color}"></span><span class="lb-name">${t.name}</span><span class="lb-score">${t.score}</span><span class="lb-connected ${t.connected?'online':'offline'}"></span></div>`;
+    const kickBtn = state.phase === 'lobby' ? `<span onclick="kickTeam('${t.id}')" style="cursor:pointer;font-size:.7em;color:var(--red);margin-left:4px" title="Kick team">✕</span>` : '';
+    return `<div class="lb-entry"><span class="lb-pos ${pc}">${i+1}</span><span class="lb-color" style="background:${t.color}"></span><span class="lb-name">${t.name}</span><span class="lb-score">${t.score}</span><span class="lb-connected ${t.connected?'online':'offline'}"></span>${kickBtn}</div>`;
   }).join('');
 }
 
@@ -419,9 +443,16 @@ function renderFinished() {
 
 function startGame() { ws.send(JSON.stringify({ type: 'start-game' })); }
 function nextQ() { ws.send(JSON.stringify({ type: 'next-question' })); }
-function selectAnswer(index) { ws.send(JSON.stringify({ type: 'select-answer', index })); }
+let _selectLock = false;
+function selectAnswer(index) {
+  if (_selectLock) return;
+  _selectLock = true;
+  ws.send(JSON.stringify({ type: 'select-answer', index }));
+  setTimeout(() => { _selectLock = false; }, 2000);
+}
 function skip() { ws.send(JSON.stringify({ type: 'skip' })); }
 function resetGame() { ws.send(JSON.stringify({ type: 'reset' })); }
+function kickTeam(id) { if(confirm('Remove this team?')) ws.send(JSON.stringify({ type: 'kick-team', teamId: id })); }
 function setLang(lang) { ws.send(JSON.stringify({ type: 'set-lang', lang })); }
 
 function showCountdown(sec) {
@@ -447,6 +478,11 @@ document.addEventListener('keydown', e => {
 });
 
 connect();
+
+// Generate QR code for player join URL
+const playerUrl = location.protocol + '//' + location.host + '/';
+document.getElementById('joinUrl').textContent = playerUrl;
+try { new QRCode(document.getElementById('qrCode'), { text: playerUrl, width: 160, height: 160, colorDark: '#0d47a1', colorLight: '#ffffff' }); } catch(e) {}
 </script>
 </body>
 </html>

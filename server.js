@@ -8,46 +8,74 @@ const app = express();
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
 
-// Load questions
-let allQuestions;
-try {
-  allQuestions = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'quiz_questions.json'), 'utf8')).questions;
-} catch(e) {
-  console.log('quiz_questions.json not found next to quiz-server/, using embedded fallback');
-  allQuestions = [];
+// Load questions — try same dir, then parent dir
+let allQuestions = [];
+for (const p of [
+  path.join(__dirname, 'quiz_questions.json'),
+  path.join(__dirname, '..', 'quiz_questions.json')
+]) {
+  try {
+    allQuestions = JSON.parse(fs.readFileSync(p, 'utf8')).questions;
+    console.log(`Loaded questions from: ${p}`);
+    break;
+  } catch(e) { /* try next */ }
 }
+if (!allQuestions.length) console.warn('WARNING: No questions loaded!');
 
-// Shuffle + pick N
+// Fisher-Yates shuffle + pick N
 function shufflePick(arr, n) {
   const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
   return a.slice(0, n);
 }
 
-// ===== GAME STATE =====
+// ===== CONFIG =====
 const QUESTIONS_PER_GAME = parseInt(process.env.QUESTIONS_PER_GAME) || 15;
-let teams = {};          // { id: { name, score, ws, buzzTime } }
+const BUZZ_TIMEOUT_SEC = parseInt(process.env.BUZZ_TIMEOUT) || 0; // 0 = no timeout
+
+// ===== GAME STATE =====
+let teams = {};         // { id: { name, score, ws, color } }
 let questions = [];
-let currentQ = -1;       // -1 = lobby
-let phase = 'lobby';     // lobby | countdown | buzzing | answering | reveal | finished
-let buzzOrder = [];       // [{ teamId, time }] ordered by buzz time
-let buzzStart = 0;        // timestamp when buzzing opened
+let currentQ = -1;
+let phase = 'lobby';    // lobby | countdown | buzzing | answering | all-wrong | reveal | finished
+let buzzOrder = [];      // [{ teamId, ms }]
+let buzzStart = 0;
+let buzzTimer = null;
 let secondLang = 'ru';
 let idCounter = 0;
 
-// Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
+// 15 distinct team colors
+const COLORS = [
+  '#E74C3C','#3498DB','#27AE60','#9B59B6','#F39C12',
+  '#1ABC9C','#E67E22','#E91E63','#00BCD4','#8BC34A',
+  '#FF5722','#607D8B','#795548','#CDDC39','#FF9800'
+];
+let colorIndex = 0;
 
-// Admin page
+// ===== SERVE STATIC =====
+app.use(express.static(path.join(__dirname, 'public')));
 app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'public', 'admin.html')));
-// Player page
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'player.html')));
+
+// ===== HEARTBEAT =====
+const PING_INTERVAL = 25000;
+setInterval(() => {
+  wss.clients.forEach(ws => {
+    if (!ws.isAlive) return ws.terminate();
+    ws.isAlive = false;
+    ws.ping();
+  });
+}, PING_INTERVAL);
 
 // ===== WEBSOCKET =====
 wss.on('connection', (ws) => {
   ws.isAlive = true;
   ws.role = null;
   ws.teamId = null;
+  ws.on('pong', () => { ws.isAlive = true; });
 
   ws.on('message', (raw) => {
     let msg;
@@ -55,134 +83,152 @@ wss.on('connection', (ws) => {
 
     switch(msg.type) {
 
-      // --- ADMIN ---
+      // ─── ADMIN ───
       case 'admin-join':
         ws.role = 'admin';
-        ws.send(JSON.stringify({
-          type: 'admin-state',
-          teams: getTeamsPublic(),
-          phase,
-          currentQ,
-          questions: questions.map(q => stripAnswer(q)),
-          buzzOrder: buzzOrder.map(b => ({ name: teams[b.teamId]?.name, ms: b.ms, color: getTeamColor(b.teamId) })),
-          secondLang,
-          totalQuestions: questions.length
-        }));
+        sendState(ws);
         break;
 
       case 'set-lang':
-        secondLang = msg.lang;
-        broadcast({ type: 'lang-changed', lang: secondLang });
+        if (['ru','tr'].includes(msg.lang)) {
+          secondLang = msg.lang;
+          broadcast({ type: 'lang-changed', lang: secondLang });
+        }
         break;
 
       case 'start-game':
+        if (Object.keys(teams).length < 1) break;
         questions = shufflePick(allQuestions, QUESTIONS_PER_GAME);
         currentQ = -1;
         Object.values(teams).forEach(t => t.score = 0);
         phase = 'countdown';
         broadcast({ type: 'game-started', totalQuestions: questions.length });
-        setTimeout(() => nextQuestion(), 500);
+        setTimeout(() => advanceQuestion(), 500);
         break;
 
       case 'next-question':
+        if (phase !== 'reveal') break;
         phase = 'countdown';
         broadcast({ type: 'countdown', seconds: 3 });
-        setTimeout(() => nextQuestion(), 3000);
+        setTimeout(() => advanceQuestion(), 3000);
         break;
 
       case 'mark-correct':
-        if (buzzOrder.length > 0 && phase === 'answering') {
-          const winner = buzzOrder[0];
-          if (teams[winner.teamId]) {
-            teams[winner.teamId].score += questions[currentQ].points;
-          }
-          phase = 'reveal';
-          const q = questions[currentQ];
-          broadcast({
-            type: 'reveal',
-            correct: q.correct,
-            explanation: q.explanation,
-            winnerName: teams[winner.teamId]?.name,
-            winnerColor: getTeamColor(winner.teamId),
-            teams: getTeamsPublic(),
-            isCorrect: true,
-            points: q.points
-          });
+        if (phase !== 'answering' || buzzOrder.length === 0) break;
+        const winner = buzzOrder[0];
+        if (teams[winner.teamId]) {
+          teams[winner.teamId].score += questions[currentQ].points;
         }
+        phase = 'reveal';
+        clearBuzzTimer();
+        broadcastReveal(teams[winner.teamId]?.name, true);
         break;
 
       case 'mark-wrong':
-        if (phase === 'answering') {
-          buzzOrder.shift();
-          if (buzzOrder.length > 0) {
-            phase = 'answering';
-            broadcast({
-              type: 'wrong-pass',
-              buzzOrder: buzzOrder.map(b => ({ name: teams[b.teamId]?.name, ms: b.ms, color: getTeamColor(b.teamId) })),
-              nextTeam: teams[buzzOrder[0].teamId]?.name
-            });
-          } else {
-            phase = 'reveal';
-            const q = questions[currentQ];
-            broadcast({
-              type: 'reveal',
-              correct: q.correct,
-              explanation: q.explanation,
-              winnerName: null,
-              teams: getTeamsPublic(),
-              isCorrect: false,
-              points: q.points
-            });
-          }
+        if (phase !== 'answering') break;
+        buzzOrder.shift();
+        if (buzzOrder.length > 0) {
+          // Pass to next team in queue
+          phase = 'answering';
+          broadcast({
+            type: 'wrong-pass',
+            buzzOrder: buzzOrderPublic(),
+            nextTeam: teams[buzzOrder[0].teamId]?.name,
+            nextColor: teams[buzzOrder[0].teamId]?.color
+          });
+        } else {
+          // Everyone who buzzed got it wrong
+          phase = 'all-wrong';
+          broadcast({ type: 'all-wrong' });
         }
         break;
 
       case 'skip':
+        if (!['buzzing','answering','all-wrong'].includes(phase)) break;
         phase = 'reveal';
-        const sq = questions[currentQ];
-        broadcast({
-          type: 'reveal',
-          correct: sq.correct,
-          explanation: sq.explanation,
-          winnerName: null,
-          teams: getTeamsPublic(),
-          isCorrect: false,
-          points: sq.points
-        });
+        clearBuzzTimer();
+        broadcastReveal(null, false);
         break;
 
       case 'reset':
         phase = 'lobby';
         currentQ = -1;
         buzzOrder = [];
+        clearBuzzTimer();
         Object.values(teams).forEach(t => t.score = 0);
         broadcast({ type: 'reset' });
         break;
 
-      // --- PLAYER ---
-      case 'join-team':
+      // ─── PLAYER ───
+      case 'join-team': {
+        const name = (msg.name || '').trim().substring(0, 30) || ('Team ' + (idCounter + 1));
+
+        // Check for reconnection (same name, disconnected)
+        const existing = Object.entries(teams).find(([id, t]) => t.name === name && !t.ws);
+        if (existing) {
+          const [existingId, existingTeam] = existing;
+          ws.role = 'player';
+          ws.teamId = existingId;
+          existingTeam.ws = ws;
+          ws.send(JSON.stringify({
+            type: 'joined',
+            teamId: existingId,
+            name: existingTeam.name,
+            color: existingTeam.color,
+            reconnected: true,
+            score: existingTeam.score
+          }));
+          // If game is in progress, tell them
+          if (phase !== 'lobby') {
+            ws.send(JSON.stringify({ type: 'game-started', totalQuestions: questions.length }));
+            if (currentQ >= 0 && currentQ < questions.length) {
+              const q = questions[currentQ];
+              ws.send(JSON.stringify({
+                type: 'question', num: currentQ + 1, total: questions.length,
+                question: q.question, options: q.options, category: q.category,
+                points: q.points, secondLang, teams: getTeamsPublic()
+              }));
+            }
+          }
+          broadcastAdmin({ type: 'teams-updated', teams: getTeamsPublic() });
+          break;
+        }
+
+        // New team
         const id = 'team_' + (++idCounter);
+        const color = COLORS[colorIndex % COLORS.length];
+        colorIndex++;
         ws.role = 'player';
         ws.teamId = id;
-        teams[id] = { name: msg.name.trim().substring(0, 30) || ('Team ' + idCounter), score: 0, ws, buzzTime: null };
-        ws.send(JSON.stringify({ type: 'joined', teamId: id, name: teams[id].name }));
+        teams[id] = { name, score: 0, ws, color };
+        ws.send(JSON.stringify({ type: 'joined', teamId: id, name, color }));
         broadcastAdmin({ type: 'teams-updated', teams: getTeamsPublic() });
         broadcastPlayers({ type: 'teams-updated', teams: getTeamsPublic() });
         break;
+      }
 
       case 'buzz':
         if (phase !== 'buzzing' || !ws.teamId || !teams[ws.teamId]) break;
-        if (buzzOrder.find(b => b.teamId === ws.teamId)) break;
+        if (buzzOrder.find(b => b.teamId === ws.teamId)) break; // already buzzed
         const ms = Date.now() - buzzStart;
         buzzOrder.push({ teamId: ws.teamId, ms });
-        teams[ws.teamId].buzzTime = ms;
+
+        // Broadcast updated buzz order to everyone
         broadcast({
           type: 'buzz-update',
-          buzzOrder: buzzOrder.map(b => ({ name: teams[b.teamId]?.name, ms: b.ms, color: getTeamColor(b.teamId) }))
+          buzzOrder: buzzOrderPublic(),
+          totalTeams: Object.keys(teams).length,
+          buzzedCount: buzzOrder.length
         });
+
+        // First buzz → start answering phase
         if (buzzOrder.length === 1) {
           phase = 'answering';
-          broadcast({ type: 'first-buzz', teamName: teams[ws.teamId].name, teamColor: getTeamColor(ws.teamId) });
+          broadcast({
+            type: 'first-buzz',
+            teamName: teams[ws.teamId].name,
+            teamColor: teams[ws.teamId].color
+          });
         }
         break;
     }
@@ -191,11 +237,13 @@ wss.on('connection', (ws) => {
   ws.on('close', () => {
     if (ws.teamId && teams[ws.teamId]) {
       teams[ws.teamId].ws = null;
+      broadcastAdmin({ type: 'teams-updated', teams: getTeamsPublic() });
     }
   });
 });
 
-function nextQuestion() {
+// ===== GAME LOGIC =====
+function advanceQuestion() {
   currentQ++;
   if (currentQ >= questions.length) {
     phase = 'finished';
@@ -217,25 +265,65 @@ function nextQuestion() {
     secondLang,
     teams: getTeamsPublic()
   });
+
+  // Optional buzz timeout
+  if (BUZZ_TIMEOUT_SEC > 0) {
+    clearBuzzTimer();
+    buzzTimer = setTimeout(() => {
+      if (phase === 'buzzing' && buzzOrder.length === 0) {
+        phase = 'all-wrong';
+        broadcast({ type: 'all-wrong' });
+      }
+    }, BUZZ_TIMEOUT_SEC * 1000);
+  }
+}
+
+function broadcastReveal(winnerName, isCorrect) {
+  const q = questions[currentQ];
+  broadcast({
+    type: 'reveal',
+    correct: q.correct,
+    explanation: q.explanation,
+    winnerName,
+    teams: getTeamsPublic(),
+    isCorrect,
+    points: q.points
+  });
+}
+
+function clearBuzzTimer() {
+  if (buzzTimer) { clearTimeout(buzzTimer); buzzTimer = null; }
 }
 
 // ===== HELPERS =====
-const COLORS = ['#E74C3C','#3498DB','#27AE60','#9B59B6','#F39C12','#1ABC9C','#E67E22','#2C3E50','#E91E63','#00BCD4','#8BC34A','#FF5722','#607D8B','#795548','#CDDC39'];
-
-function getTeamColor(teamId) {
-  const ids = Object.keys(teams);
-  const idx = ids.indexOf(teamId);
-  return COLORS[idx % COLORS.length];
-}
-
 function getTeamsPublic() {
-  return Object.entries(teams).map(([id, t], i) => ({
-    id, name: t.name, score: t.score, color: COLORS[i % COLORS.length], connected: !!t.ws
+  return Object.entries(teams).map(([id, t]) => ({
+    id, name: t.name, score: t.score, color: t.color, connected: !!t.ws
   })).sort((a, b) => b.score - a.score);
 }
 
-function stripAnswer(q) {
-  return { question: q.question, options: q.options, category: q.category, points: q.points, explanation: q.explanation };
+function buzzOrderPublic() {
+  return buzzOrder.map(b => ({
+    name: teams[b.teamId]?.name,
+    ms: b.ms,
+    color: teams[b.teamId]?.color
+  }));
+}
+
+function sendState(ws) {
+  ws.send(JSON.stringify({
+    type: 'admin-state',
+    teams: getTeamsPublic(),
+    phase,
+    currentQ,
+    questions: questions.map(q => ({
+      question: q.question, options: q.options, category: q.category,
+      points: q.points, explanation: q.explanation
+    })),
+    buzzOrder: buzzOrderPublic(),
+    secondLang,
+    totalQuestions: questions.length
+  }));
 }
 
 function broadcast(msg) {
@@ -251,21 +339,18 @@ function broadcastPlayers(msg) {
   wss.clients.forEach(c => { if (c.readyState === 1 && c.role === 'player') c.send(s); });
 }
 
-// Start
+// ===== START =====
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, '0.0.0.0', () => {
   console.log('');
-  console.log('===========================================');
-  console.log('  SDG 15.3.1 QUIZ SERVER');
-  console.log('===========================================');
-  console.log('');
-  console.log(`  Questions pool: ${allQuestions.length} (${QUESTIONS_PER_GAME} per game)`);
-  console.log(`  Admin panel:  http://localhost:${PORT}/admin`);
-  console.log(`  Player join:  http://localhost:${PORT}/`);
-  console.log('');
-  console.log('  On the same WiFi network, players use:');
-  console.log(`  http://<YOUR-IP>:${PORT}/`);
-  console.log('');
-  console.log('  Press Ctrl+C to stop.');
-  console.log('===========================================');
+  console.log('╔═══════════════════════════════════════════╗');
+  console.log('║         SDG 15.3.1 QUIZ SERVER            ║');
+  console.log('╠═══════════════════════════════════════════╣');
+  console.log(`║  Questions pool: ${String(allQuestions.length).padEnd(3)} (${QUESTIONS_PER_GAME} per game)       ║`);
+  console.log(`║  Admin panel:  http://localhost:${PORT}/admin  ║`);
+  console.log(`║  Player join:  http://localhost:${PORT}/        ║`);
+  console.log('╠═══════════════════════════════════════════╣');
+  console.log('║  Players on same network use:             ║');
+  console.log(`║  http://<YOUR-IP>:${PORT}/                     ║`);
+  console.log('╚═══════════════════════════════════════════╝');
 });

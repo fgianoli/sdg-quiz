@@ -1,0 +1,2315 @@
+{
+  "title": {
+    "en": "SDG 15.3.1 QUIZ",
+    "ru": "Викторина ЦУР 15.3.1",
+    "tr": "SKA 15.3.1 QUIZ"
+  },
+  "subtitle": {
+    "en": "UNCCD Regional Capacity Building Workshop — Antalya 2026",
+    "ru": "Региональный семинар UNCCD — Анталья 2026",
+    "tr": "UNCCD Bölgesel Kapasite Geliştirme Atölyesi — Antalya 2026"
+  },
+  "questions": [
+    {
+      "category": {
+        "en": "Acronyms",
+        "ru": "Аббревиатуры",
+        "tr": "Kısaltmalar"
+      },
+      "question": {
+        "en": "What does SDG 15.3.1 measure?",
+        "ru": "Что измеряет ЦУР 15.3.1?",
+        "tr": "SKA 15.3.1 neyi ölçer?"
+      },
+      "options": {
+        "en": [
+          "Proportion of land that is degraded",
+          "Forest canopy cover loss",
+          "Annual rainfall change",
+          "Coastal erosion rate"
+        ],
+        "ru": [
+          "Долю деградированных земель",
+          "Потерю лесного покрова",
+          "Изменение осадков",
+          "Скорость береговой эрозии"
+        ],
+        "tr": [
+          "Bozulmuş arazi oranı",
+          "Orman örtüsü kaybı",
+          "Yıllık yağış değişimi",
+          "Kıyı erozyonu oranı"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "SDG 15.3.1 = Proportion of land that is degraded over total land area.",
+        "ru": "ЦУР 15.3.1 = Доля деградированных земель от общей площади.",
+        "tr": "SKA 15.3.1 = Toplam arazi alanında bozulmuş arazi oranı."
+      }
+    },
+    {
+      "category": {
+        "en": "Acronyms",
+        "ru": "Аббревиатуры",
+        "tr": "Kısaltmalar"
+      },
+      "question": {
+        "en": "What does OOAO stand for?",
+        "ru": "Что означает OOAO?",
+        "tr": "OOAO ne anlama gelir?"
+      },
+      "options": {
+        "en": [
+          "One-Out All-Out",
+          "Output Of All Outputs",
+          "Observation Over All Observations",
+          "Ordered Overlay And Output"
+        ],
+        "ru": [
+          "One-Out All-Out (Один вышел — все вышли)",
+          "Output Of All Outputs",
+          "Observation Over All Observations",
+          "Ordered Overlay And Output"
+        ],
+        "tr": [
+          "One-Out All-Out (Biri çıkarsa hepsi çıkar)",
+          "Output Of All Outputs",
+          "Observation Over All Observations",
+          "Ordered Overlay And Output"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "OOAO: if ANY sub-indicator shows degradation, the pixel is classified as degraded.",
+        "ru": "OOAO: если ЛЮБОЙ субиндикатор показывает деградацию, пиксель классифицируется как деградированный.",
+        "tr": "OOAO: herhangi bir alt gösterge bozulma gösteriyorsa piksel bozulmuş olarak sınıflandırılır."
+      }
+    },
+    {
+      "category": {
+        "en": "Trends.Earth",
+        "ru": "Trends.Earth",
+        "tr": "Trends.Earth"
+      },
+      "question": {
+        "en": "Which QGIS version is required for Trends.Earth?",
+        "ru": "Какая версия QGIS требуется для Trends.Earth?",
+        "tr": "Trends.Earth için hangi QGIS sürümü gereklidir?"
+      },
+      "options": {
+        "en": [
+          "QGIS LTR 3.34",
+          "QGIS 4.0",
+          "QGIS 2.18",
+          "Any version works"
+        ],
+        "ru": [
+          "QGIS LTR 3.34",
+          "QGIS 4.0",
+          "QGIS 2.18",
+          "Любая версия"
+        ],
+        "tr": [
+          "QGIS LTR 3.34",
+          "QGIS 4.0",
+          "QGIS 2.18",
+          "Herhangi bir sürüm"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "QGIS 4.0 is NOT compatible with Trends.Earth. Use LTR 3.34!",
+        "ru": "QGIS 4.0 НЕ совместим с Trends.Earth. Используйте LTR 3.34!",
+        "tr": "QGIS 4.0 Trends.Earth ile uyumlu DEĞİLDİR. LTR 3.34 kullanın!"
+      }
+    },
+    {
+      "category": {
+        "en": "Data",
+        "ru": "Данные",
+        "tr": "Veri"
+      },
+      "question": {
+        "en": "What is the default land cover dataset in Trends.Earth?",
+        "ru": "Какой набор данных о земельном покрове используется по умолчанию?",
+        "tr": "Trends.Earth'te varsayılan arazi örtüsü veri seti nedir?"
+      },
+      "options": {
+        "en": [
+          "ESA CCI (300m)",
+          "CORINE (100m)",
+          "Sentinel-2 (10m)",
+          "Landsat (30m)"
+        ],
+        "ru": [
+          "ESA CCI (300м)",
+          "CORINE (100м)",
+          "Sentinel-2 (10м)",
+          "Landsat (30м)"
+        ],
+        "tr": [
+          "ESA CCI (300m)",
+          "CORINE (100m)",
+          "Sentinel-2 (10m)",
+          "Landsat (30m)"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "ESA CCI at 300m is the global default. National data like CORINE (100m) replaces it.",
+        "ru": "ESA CCI (300м) — глобальный по умолчанию. CORINE (100м) заменяет его.",
+        "tr": "ESA CCI (300m) küresel varsayılandır. CORINE (100m) gibi ulusal veriler onu değiştirir."
+      }
+    },
+    {
+      "category": {
+        "en": "CORINE",
+        "ru": "CORINE",
+        "tr": "CORINE"
+      },
+      "question": {
+        "en": "How many land cover classes does CORINE have?",
+        "ru": "Сколько классов земельного покрова в CORINE?",
+        "tr": "CORINE kaç arazi örtüsü sınıfına sahiptir?"
+      },
+      "options": {
+        "en": [
+          "44",
+          "7",
+          "22",
+          "100"
+        ],
+        "ru": [
+          "44",
+          "7",
+          "22",
+          "100"
+        ],
+        "tr": [
+          "44",
+          "7",
+          "22",
+          "100"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "CORINE has 44 classes that must be aggregated to 7 UNCCD classes.",
+        "ru": "CORINE имеет 44 класса, агрегируемых до 7 классов UNCCD.",
+        "tr": "CORINE'in 7 UNCCD sınıfına birleştirilmesi gereken 44 sınıfı vardır."
+      }
+    },
+    {
+      "category": {
+        "en": "Acronyms",
+        "ru": "Аббревиатуры",
+        "tr": "Kısaltmalar"
+      },
+      "question": {
+        "en": "What does PRAIS stand for?",
+        "ru": "Что означает PRAIS?",
+        "tr": "PRAIS ne anlama gelir?"
+      },
+      "options": {
+        "en": [
+          "Performance Review and Assessment of Implementation System",
+          "Project Reporting and Indicator System",
+          "Progressive Remote Assessment Information Service",
+          "Protocol for Reporting Arid Information Standards"
+        ],
+        "ru": [
+          "Performance Review and Assessment of Implementation System",
+          "Project Reporting and Indicator System",
+          "Progressive Remote Assessment Information Service",
+          "Protocol for Reporting Arid Information Standards"
+        ],
+        "tr": [
+          "Performance Review and Assessment of Implementation System",
+          "Project Reporting and Indicator System",
+          "Progressive Remote Assessment Information Service",
+          "Protocol for Reporting Arid Information Standards"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "PRAIS 4 is the UNCCD's online reporting platform.",
+        "ru": "PRAIS 4 — онлайн-платформа UNCCD для отчётности.",
+        "tr": "PRAIS 4, UNCCD'nin çevrimiçi raporlama platformudur."
+      }
+    },
+    {
+      "category": {
+        "en": "Trends.Earth",
+        "ru": "Trends.Earth",
+        "tr": "Trends.Earth"
+      },
+      "question": {
+        "en": "Which processing engine does Trends.Earth use for remote execution?",
+        "ru": "Какой движок использует Trends.Earth для удалённых вычислений?",
+        "tr": "Trends.Earth uzaktan işlem için hangi motoru kullanır?"
+      },
+      "options": {
+        "en": [
+          "Google Earth Engine",
+          "Amazon Web Services",
+          "Microsoft Azure",
+          "Local CPU only"
+        ],
+        "ru": [
+          "Google Earth Engine",
+          "Amazon Web Services",
+          "Microsoft Azure",
+          "Только локальный CPU"
+        ],
+        "tr": [
+          "Google Earth Engine",
+          "Amazon Web Services",
+          "Microsoft Azure",
+          "Yalnızca yerel CPU"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "Trends.Earth sends jobs to Google Earth Engine for satellite data processing.",
+        "ru": "Trends.Earth отправляет задачи в Google Earth Engine.",
+        "tr": "Trends.Earth uydu verisi işleme için Google Earth Engine'e iş gönderir."
+      }
+    },
+    {
+      "category": {
+        "en": "Data",
+        "ru": "Данные",
+        "tr": "Veri"
+      },
+      "question": {
+        "en": "What is GSOCmap?",
+        "ru": "Что такое GSOCmap?",
+        "tr": "GSOCmap nedir?"
+      },
+      "options": {
+        "en": [
+          "FAO's Global Soil Organic Carbon map",
+          "Google Satellite Observation Coverage map",
+          "A vegetation greenness index",
+          "A drought severity map"
+        ],
+        "ru": [
+          "Глобальная карта органического углерода почв ФАО",
+          "Карта покрытия спутниковых наблюдений",
+          "Индекс зелёности растительности",
+          "Карта степени засухи"
+        ],
+        "tr": [
+          "FAO'nun Küresel Toprak Organik Karbon haritası",
+          "Google Uydu Gözlem haritası",
+          "Bitki örtüsü yeşillik indeksi",
+          "Kuraklık şiddeti haritası"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "GSOCmap is a Tier 2 alternative to the default SoilGrids SOC data.",
+        "ru": "GSOCmap — альтернатива уровня 2 данным SoilGrids.",
+        "tr": "GSOCmap, varsayılan SoilGrids SOC verisine Kademe 2 alternatifidir."
+      }
+    },
+    {
+      "category": {
+        "en": "Workflow",
+        "ru": "Процесс",
+        "tr": "İş Akışı"
+      },
+      "question": {
+        "en": "What are the three SDG 15.3.1 sub-indicators?",
+        "ru": "Каковы три субиндикатора ЦУР 15.3.1?",
+        "tr": "SKA 15.3.1'in üç alt göstergesi nedir?"
+      },
+      "options": {
+        "en": [
+          "Land Cover, Productivity (LPD), Soil Organic Carbon",
+          "Temperature, Rainfall, Wind speed",
+          "Forest area, Wetland area, Cropland area",
+          "NDVI, NDWI, NDBI"
+        ],
+        "ru": [
+          "Земельный покров, Продуктивность, Органический углерод почв",
+          "Температура, Осадки, Скорость ветра",
+          "Площадь лесов, Водно-болотных угодий, Пашни",
+          "NDVI, NDWI, NDBI"
+        ],
+        "tr": [
+          "Arazi örtüsü, Verimlilik (LPD), Toprak Organik Karbonu",
+          "Sıcaklık, Yağış, Rüzgâr hızı",
+          "Orman, Sulak alan, Tarım alanı",
+          "NDVI, NDWI, NDBI"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "SO1-1 Land Cover + SO1-2 Productivity + SO1-3 SOC = SDG 15.3.1",
+        "ru": "SO1-1 + SO1-2 + SO1-3 = ЦУР 15.3.1",
+        "tr": "SO1-1 + SO1-2 + SO1-3 = SKA 15.3.1"
+      }
+    },
+    {
+      "category": {
+        "en": "Workflow",
+        "ru": "Процесс",
+        "tr": "İş Akışı"
+      },
+      "question": {
+        "en": "What formats does Trends.Earth accept for custom population import?",
+        "ru": "Какие форматы принимает Trends.Earth для импорта данных о населении?",
+        "tr": "Trends.Earth özel nüfus verisi aktarımında hangi formatları kabul eder?"
+      },
+      "options": {
+        "en": [
+          "Both raster (GeoTIFF) and vector",
+          "Only GeoTIFF raster",
+          "Only CSV tables",
+          "Population import is not supported"
+        ],
+        "ru": [
+          "И растр (GeoTIFF), и вектор",
+          "Только GeoTIFF растр",
+          "Только CSV таблицы",
+          "Импорт населения не поддерживается"
+        ],
+        "tr": [
+          "Hem raster (GeoTIFF) hem vektör",
+          "Yalnızca GeoTIFF raster",
+          "Yalnızca CSV tabloları",
+          "Nüfus aktarımı desteklenmiyor"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "Trends.Earth supports importing custom population data as both raster (GeoTIFF) and vector formats.",
+        "ru": "Trends.Earth поддерживает импорт данных о населении как в растровом (GeoTIFF), так и в векторном формате.",
+        "tr": "Trends.Earth, özel nüfus verisini hem raster (GeoTIFF) hem de vektör formatında aktarmayı destekler."
+      }
+    },
+    {
+      "category": {
+        "en": "Acronyms",
+        "ru": "Аббревиатуры",
+        "tr": "Kısaltmalar"
+      },
+      "question": {
+        "en": "What does CDSE stand for?",
+        "ru": "Что означает CDSE?",
+        "tr": "CDSE ne anlama gelir?"
+      },
+      "options": {
+        "en": [
+          "Copernicus Data Space Ecosystem",
+          "Central Data Storage for Europe",
+          "Climate Data Satellite Exchange",
+          "Copernicus Download Service Engine"
+        ],
+        "ru": [
+          "Copernicus Data Space Ecosystem",
+          "Central Data Storage for Europe",
+          "Climate Data Satellite Exchange",
+          "Copernicus Download Service Engine"
+        ],
+        "tr": [
+          "Copernicus Data Space Ecosystem",
+          "Central Data Storage for Europe",
+          "Climate Data Satellite Exchange",
+          "Copernicus Download Service Engine"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "CDSE (dataspace.copernicus.eu) is the main portal for all Copernicus data.",
+        "ru": "CDSE (dataspace.copernicus.eu) — главный портал данных Copernicus.",
+        "tr": "CDSE (dataspace.copernicus.eu) tüm Copernicus verileri için ana portaldır."
+      }
+    },
+    {
+      "category": {
+        "en": "Workflow",
+        "ru": "Процесс",
+        "tr": "İş Akışı"
+      },
+      "question": {
+        "en": "What is a 'false positive' in SDG 15.3.1 reporting?",
+        "ru": "Что такое «ложноположительный результат» в отчётности ЦУР 15.3.1?",
+        "tr": "SKA 15.3.1 raporlamasında 'yanlış pozitif' nedir?"
+      },
+      "options": {
+        "en": [
+          "An area wrongly flagged as degraded",
+          "An area wrongly flagged as improved",
+          "A missing pixel in the raster",
+          "A software bug"
+        ],
+        "ru": [
+          "Ошибочно отмеченная как деградированная",
+          "Ошибочно отмеченная как улучшенная",
+          "Отсутствующий пиксель",
+          "Программная ошибка"
+        ],
+        "tr": [
+          "Yanlışlıkla bozulmuş işaretlenmiş alan",
+          "Yanlışlıkla iyileşmiş işaretlenmiş alan",
+          "Eksik piksel",
+          "Yazılım hatası"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "False positive = looks degraded in data but isn't (e.g., seasonal bare soil after harvest).",
+        "ru": "Ложноположительный = выглядит как деградация, но не является (напр., голая почва после уборки).",
+        "tr": "Yanlış pozitif = veride bozulmuş görünüyor ama değil (örn. hasat sonrası çıplak toprak)."
+      }
+    },
+    {
+      "category": {
+        "en": "Data",
+        "ru": "Данные",
+        "tr": "Veri"
+      },
+      "question": {
+        "en": "What is the FAO-WOCAT v2 preset used for?",
+        "ru": "Для чего используется пресет FAO-WOCAT v2?",
+        "tr": "FAO-WOCAT v2 ön ayarı ne için kullanılır?"
+      },
+      "options": {
+        "en": [
+          "An alternative Land Productivity Dynamics algorithm",
+          "Importing custom SOC data",
+          "Generating PRAIS 4 reports",
+          "Downloading satellite imagery"
+        ],
+        "ru": [
+          "Альтернативный алгоритм продуктивности земель",
+          "Импорт данных SOC",
+          "Генерация отчётов PRAIS 4",
+          "Скачивание спутниковых снимков"
+        ],
+        "tr": [
+          "Alternatif Arazi Verimlilik algoritması",
+          "SOC verisi aktarma",
+          "PRAIS 4 raporları oluşturma",
+          "Uydu görüntüsü indirme"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "FAO-WOCAT v2 is an alternative to JRC LPDynR for computing productivity trends.",
+        "ru": "FAO-WOCAT v2 — альтернатива JRC LPDynR для трендов продуктивности.",
+        "tr": "FAO-WOCAT v2, verimlilik eğilimleri için JRC LPDynR'ye alternatiftir."
+      }
+    },
+    {
+      "category": {
+        "en": "Acronyms",
+        "ru": "Аббревиатуры",
+        "tr": "Kısaltmalar"
+      },
+      "question": {
+        "en": "What does UNCCD stand for?",
+        "ru": "Что означает КБО ООН (UNCCD)?",
+        "tr": "UNCCD ne anlama gelir?"
+      },
+      "options": {
+        "en": [
+          "United Nations Convention to Combat Desertification",
+          "United Nations Council for Climate Development",
+          "Universal Network for Carbon Capture and Disposal",
+          "United Nations Commission on Coastal Defence"
+        ],
+        "ru": [
+          "Конвенция ООН по борьбе с опустыниванием",
+          "Совет ООН по климатическому развитию",
+          "Сеть по улавливанию углерода",
+          "Комиссия ООН по защите побережья"
+        ],
+        "tr": [
+          "BM Çölleşmeyle Mücadele Sözleşmesi",
+          "BM İklim Geliştirme Konseyi",
+          "Evrensel Karbon Yakalama Ağı",
+          "BM Kıyı Savunma Komisyonu"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "UNCCD is the United Nations Convention to Combat Desertification (1994).",
+        "ru": "UNCCD — Конвенция ООН по борьбе с опустыниванием (1994).",
+        "tr": "UNCCD, BM Çölleşmeyle Mücadele Sözleşmesi'dir (1994)."
+      }
+    },
+    {
+      "category": {
+        "en": "Workflow",
+        "ru": "Процесс",
+        "tr": "İş Akışı"
+      },
+      "question": {
+        "en": "After generating the UNCCD data package, where do you upload it?",
+        "ru": "Куда загружают пакет данных UNCCD?",
+        "tr": "UNCCD veri paketini nereye yüklersiniz?"
+      },
+      "options": {
+        "en": [
+          "PRAIS 4 (Trends.Earth Archive Upload)",
+          "Google Drive",
+          "Email to UNCCD Secretariat",
+          "FAO GLOSIS portal"
+        ],
+        "ru": [
+          "PRAIS 4 (загрузка архива Trends.Earth)",
+          "Google Drive",
+          "По почте в Секретариат UNCCD",
+          "Портал FAO GLOSIS"
+        ],
+        "tr": [
+          "PRAIS 4 (Trends.Earth Arşiv Yükleme)",
+          "Google Drive",
+          "UNCCD Sekretaryası'na e-posta",
+          "FAO GLOSIS portalı"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "The archive is uploaded to PRAIS 4 which auto-fills the reporting tables.",
+        "ru": "Архив загружается в PRAIS 4, который автоматически заполняет таблицы.",
+        "tr": "Arşiv, tabloları otomatik dolduran PRAIS 4'e yüklenir."
+      }
+    },
+    {
+      "category": {
+        "en": "Acronyms",
+        "ru": "Аббревиатуры",
+        "tr": "Kısaltmalar"
+      },
+      "question": {
+        "en": "What does LPD stand for?",
+        "ru": "Что означает LPD?",
+        "tr": "LPD ne anlama gelir?"
+      },
+      "options": {
+        "en": [
+          "Land Productivity Dynamics",
+          "Land Protection Database",
+          "Local Planning Directive",
+          "Low-Power Detection"
+        ],
+        "ru": [
+          "Динамика продуктивности земель",
+          "База данных защиты земель",
+          "Директива местного планирования",
+          "Обнаружение низкой мощности"
+        ],
+        "tr": [
+          "Arazi Verimlilik Dinamiği",
+          "Arazi Koruma Veritabanı",
+          "Yerel Planlama Direktifi",
+          "Düşük Güç Algılama"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "LPD = Land Productivity Dynamics, one of the three SDG 15.3.1 sub-indicators.",
+        "ru": "LPD = Динамика продуктивности земель, один из трёх субиндикаторов ЦУР 15.3.1.",
+        "tr": "LPD = Arazi Verimlilik Dinamiği, SKA 15.3.1'in üç alt göstergesinden biri."
+      }
+    },
+    {
+      "category": {
+        "en": "Acronyms",
+        "ru": "Аббревиатуры",
+        "tr": "Kısaltmalar"
+      },
+      "question": {
+        "en": "What does SOC stand for in SDG 15.3.1?",
+        "ru": "Что означает SOC в контексте ЦУР 15.3.1?",
+        "tr": "SKA 15.3.1'de SOC ne anlama gelir?"
+      },
+      "options": {
+        "en": [
+          "Soil Organic Carbon",
+          "System Operating Conditions",
+          "Standard Output Classification",
+          "Satellite Observation Centre"
+        ],
+        "ru": [
+          "Органический углерод почв",
+          "Условия работы системы",
+          "Стандартная классификация выходных данных",
+          "Центр спутниковых наблюдений"
+        ],
+        "tr": [
+          "Toprak Organik Karbonu",
+          "Sistem Çalışma Koşulları",
+          "Standart Çıktı Sınıflandırması",
+          "Uydu Gözlem Merkezi"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "SOC = Soil Organic Carbon, the third sub-indicator (SO1-3) of SDG 15.3.1.",
+        "ru": "SOC = Органический углерод почв, третий субиндикатор (SO1-3) ЦУР 15.3.1.",
+        "tr": "SOC = Toprak Organik Karbonu, SKA 15.3.1'in üçüncü alt göstergesi (SO1-3)."
+      }
+    },
+    {
+      "category": {
+        "en": "Acronyms",
+        "ru": "Аббревиатуры",
+        "tr": "Kısaltmalar"
+      },
+      "question": {
+        "en": "What does CLMS stand for?",
+        "ru": "Что означает CLMS?",
+        "tr": "CLMS ne anlama gelir?"
+      },
+      "options": {
+        "en": [
+          "Copernicus Land Monitoring Service",
+          "Central Land Management System",
+          "Climate and Land Mapping Suite",
+          "Copernicus Land Model Simulation"
+        ],
+        "ru": [
+          "Служба мониторинга земель Copernicus",
+          "Центральная система управления землями",
+          "Комплекс климатического и земельного картографирования",
+          "Моделирование земель Copernicus"
+        ],
+        "tr": [
+          "Copernicus Arazi İzleme Servisi",
+          "Merkezi Arazi Yönetim Sistemi",
+          "İklim ve Arazi Haritalama Paketi",
+          "Copernicus Arazi Model Simülasyonu"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "CLMS = Copernicus Land Monitoring Service, which provides CORINE and other land cover data.",
+        "ru": "CLMS = Служба мониторинга земель Copernicus, предоставляющая CORINE и другие данные.",
+        "tr": "CLMS = Copernicus Arazi İzleme Servisi, CORINE ve diğer arazi verileri sağlar."
+      }
+    },
+    {
+      "category": {
+        "en": "Data",
+        "ru": "Данные",
+        "tr": "Veri"
+      },
+      "question": {
+        "en": "What is the spatial resolution of CORINE Land Cover?",
+        "ru": "Каково пространственное разрешение CORINE Land Cover?",
+        "tr": "CORINE Arazi Örtüsü'nün mekansal çözünürlüğü nedir?"
+      },
+      "options": {
+        "en": [
+          "100 metres",
+          "10 metres",
+          "300 metres",
+          "1 kilometre"
+        ],
+        "ru": [
+          "100 метров",
+          "10 метров",
+          "300 метров",
+          "1 километр"
+        ],
+        "tr": [
+          "100 metre",
+          "10 metre",
+          "300 metre",
+          "1 kilometre"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "CORINE Land Cover has a 100m resolution, which is higher than the default ESA CCI (300m).",
+        "ru": "CORINE Land Cover имеет разрешение 100м — выше, чем ESA CCI (300м).",
+        "tr": "CORINE Arazi Örtüsü 100m çözünürlüğe sahiptir — varsayılan ESA CCI'den (300m) daha yüksek."
+      }
+    },
+    {
+      "category": {
+        "en": "Workflow",
+        "ru": "Процесс",
+        "tr": "İş Akışı"
+      },
+      "question": {
+        "en": "What is the baseline period for the 2026 UNCCD reporting cycle?",
+        "ru": "Каков базовый период для цикла отчётности UNCCD 2026?",
+        "tr": "2026 UNCCD raporlama döngüsü için baz dönem nedir?"
+      },
+      "options": {
+        "en": [
+          "2000–2015",
+          "2000–2010",
+          "2010–2020",
+          "2005–2015"
+        ],
+        "ru": [
+          "2000–2015",
+          "2000–2010",
+          "2010–2020",
+          "2005–2015"
+        ],
+        "tr": [
+          "2000–2015",
+          "2000–2010",
+          "2010–2020",
+          "2005–2015"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "Baseline: 2000–2015, Reporting: 2016–2023 for the 2026 cycle.",
+        "ru": "Базовый: 2000–2015, Отчётный: 2016–2023 для цикла 2026.",
+        "tr": "Baz: 2000–2015, Raporlama: 2016–2023 (2026 döngüsü)."
+      }
+    },
+    {
+      "category": {
+        "en": "Workflow",
+        "ru": "Процесс",
+        "tr": "İş Akışı"
+      },
+      "question": {
+        "en": "How long does a remote execution in Trends.Earth typically take?",
+        "ru": "Сколько обычно длится удалённое выполнение в Trends.Earth?",
+        "tr": "Trends.Earth'te uzaktan işlem genellikle ne kadar sürer?"
+      },
+      "options": {
+        "en": [
+          "5–15 minutes",
+          "Less than 30 seconds",
+          "About 2 hours",
+          "24 hours"
+        ],
+        "ru": [
+          "5–15 минут",
+          "Менее 30 секунд",
+          "Около 2 часов",
+          "24 часа"
+        ],
+        "tr": [
+          "5–15 dakika",
+          "30 saniyeden az",
+          "Yaklaşık 2 saat",
+          "24 saat"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "Remote execution via Google Earth Engine typically takes 5–15 minutes for a province-sized area.",
+        "ru": "Удалённое выполнение через GEE обычно занимает 5–15 минут для области размером с провинцию.",
+        "tr": "GEE aracılığıyla uzaktan işlem, il boyutundaki bir alan için genellikle 5–15 dakika sürer."
+      }
+    },
+    {
+      "category": {
+        "en": "Data",
+        "ru": "Данные",
+        "tr": "Veri"
+      },
+      "question": {
+        "en": "What is the default productivity dataset in Trends.Earth?",
+        "ru": "Какой набор данных о продуктивности используется по умолчанию?",
+        "tr": "Trends.Earth'te varsayılan verimlilik veri seti nedir?"
+      },
+      "options": {
+        "en": [
+          "MODIS NDVI with JRC LPDynR",
+          "Sentinel-2 NDVI",
+          "Landsat EVI",
+          "AVHRR NDVI"
+        ],
+        "ru": [
+          "MODIS NDVI с JRC LPDynR",
+          "Sentinel-2 NDVI",
+          "Landsat EVI",
+          "AVHRR NDVI"
+        ],
+        "tr": [
+          "MODIS NDVI ve JRC LPDynR",
+          "Sentinel-2 NDVI",
+          "Landsat EVI",
+          "AVHRR NDVI"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "The default is MODIS NDVI processed with the JRC LPDynR algorithm (250m resolution).",
+        "ru": "По умолчанию — MODIS NDVI, обработанный алгоритмом JRC LPDynR (250м).",
+        "tr": "Varsayılan: JRC LPDynR algoritmasıyla işlenmiş MODIS NDVI (250m)."
+      }
+    },
+    {
+      "category": {
+        "en": "Trends.Earth",
+        "ru": "Trends.Earth",
+        "tr": "Trends.Earth"
+      },
+      "question": {
+        "en": "Who developed Trends.Earth?",
+        "ru": "Кто разработал Trends.Earth?",
+        "tr": "Trends.Earth'i kim geliştirdi?"
+      },
+      "options": {
+        "en": [
+          "Conservation International",
+          "FAO",
+          "European Commission",
+          "World Bank"
+        ],
+        "ru": [
+          "Conservation International",
+          "ФАО",
+          "Европейская комиссия",
+          "Всемирный банк"
+        ],
+        "tr": [
+          "Conservation International",
+          "FAO",
+          "Avrupa Komisyonu",
+          "Dünya Bankası"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "Trends.Earth was developed by Conservation International, with partners including NASA and Lund University.",
+        "ru": "Trends.Earth разработан Conservation International совместно с NASA и Лундским университетом.",
+        "tr": "Trends.Earth, NASA ve Lund Üniversitesi gibi ortaklarla birlikte Conservation International tarafından geliştirildi."
+      }
+    },
+    {
+      "category": {
+        "en": "Data",
+        "ru": "Данные",
+        "tr": "Veri"
+      },
+      "question": {
+        "en": "What is the default SOC dataset in Trends.Earth?",
+        "ru": "Какой набор данных SOC используется по умолчанию?",
+        "tr": "Trends.Earth'te varsayılan SOC veri seti nedir?"
+      },
+      "options": {
+        "en": [
+          "SoilGrids (ISRIC)",
+          "GSOCmap (FAO)",
+          "HWSD",
+          "EU Soil Database"
+        ],
+        "ru": [
+          "SoilGrids (ISRIC)",
+          "GSOCmap (ФАО)",
+          "HWSD",
+          "База данных почв ЕС"
+        ],
+        "tr": [
+          "SoilGrids (ISRIC)",
+          "GSOCmap (FAO)",
+          "HWSD",
+          "AB Toprak Veritabanı"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "SoilGrids from ISRIC (250m) is the default. GSOCmap is the Tier 2 national alternative.",
+        "ru": "SoilGrids от ISRIC (250м) — по умолчанию. GSOCmap — альтернатива уровня 2.",
+        "tr": "ISRIC'ten SoilGrids (250m) varsayılandır. GSOCmap, Kademe 2 ulusal alternatifidir."
+      }
+    },
+    {
+      "category": {
+        "en": "Workflow",
+        "ru": "Процесс",
+        "tr": "İş Akışı"
+      },
+      "question": {
+        "en": "What tool in Trends.Earth is used to digitise false positives?",
+        "ru": "Какой инструмент в Trends.Earth используется для оцифровки ложноположительных?",
+        "tr": "Trends.Earth'te yanlış pozitifleri sayısallaştırmak için hangi araç kullanılır?"
+      },
+      "options": {
+        "en": [
+          "Polygon / Buffer tool",
+          "Raster Calculator",
+          "Layer Styling",
+          "Print Layout"
+        ],
+        "ru": [
+          "Инструмент Полигон / Буфер",
+          "Растровый калькулятор",
+          "Стилизация слоёв",
+          "Макет печати"
+        ],
+        "tr": [
+          "Poligon / Tampon aracı",
+          "Raster Hesap Makinesi",
+          "Katman Stillendirme",
+          "Baskı Düzeni"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "Use the Polygon or Buffer tool to draw areas and classify them as false positive/negative with justification.",
+        "ru": "Используйте инструмент Полигон/Буфер для обозначения областей как ложноположительных/отрицательных.",
+        "tr": "Alanları çizmek ve gerekçesiyle yanlış pozitif/negatif olarak sınıflandırmak için Poligon/Tampon aracı kullanılır."
+      }
+    },
+    {
+      "category": {
+        "en": "Workflow",
+        "ru": "Процесс",
+        "tr": "İş Akışı"
+      },
+      "question": {
+        "en": "What is a 'false negative' in SDG 15.3.1 context?",
+        "ru": "Что такое «ложноотрицательный результат» в контексте ЦУР 15.3.1?",
+        "tr": "SKA 15.3.1 bağlamında 'yanlış negatif' nedir?"
+      },
+      "options": {
+        "en": [
+          "Actual degradation missed by the analysis",
+          "An area wrongly flagged as degraded",
+          "A corrupt pixel value",
+          "A cloud-covered area"
+        ],
+        "ru": [
+          "Реальная деградация, пропущенная анализом",
+          "Область, ошибочно отмеченная как деградированная",
+          "Повреждённое значение пикселя",
+          "Область, покрытая облаками"
+        ],
+        "tr": [
+          "Analizin kaçırdığı gerçek bozulma",
+          "Yanlışlıkla bozulmuş işaretlenmiş alan",
+          "Bozuk piksel değeri",
+          "Bulutla kaplı alan"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "False negative = real degradation that the indicators failed to detect (e.g., invasive species, soil salinisation).",
+        "ru": "Ложноотрицательный = реальная деградация, не обнаруженная индикаторами (напр., инвазивные виды).",
+        "tr": "Yanlış negatif = göstergelerin tespit edemediği gerçek bozulma (örn. istilacı türler, toprak tuzlanması)."
+      }
+    },
+    {
+      "category": {
+        "en": "CORINE",
+        "ru": "CORINE",
+        "tr": "CORINE"
+      },
+      "question": {
+        "en": "Why can't CGLS-LC100 replace CORINE for the 2000 baseline?",
+        "ru": "Почему CGLS-LC100 не может заменить CORINE для базового 2000 года?",
+        "tr": "CGLS-LC100 neden 2000 baz yılı için CORINE'in yerini alamaz?"
+      },
+      "options": {
+        "en": [
+          "It only starts from 2015",
+          "It has lower resolution",
+          "It doesn't cover Europe",
+          "It uses different classes"
+        ],
+        "ru": [
+          "Начинается только с 2015 года",
+          "Имеет более низкое разрешение",
+          "Не покрывает Европу",
+          "Использует другие классы"
+        ],
+        "tr": [
+          "Yalnızca 2015'ten başlıyor",
+          "Daha düşük çözünürlüğe sahip",
+          "Avrupa'yı kapsamıyor",
+          "Farklı sınıflar kullanıyor"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "CGLS-LC100 (Copernicus 100m) time series starts from 2015, so there is no 2000 baseline available.",
+        "ru": "Временной ряд CGLS-LC100 начинается с 2015 года — базовый 2000 год недоступен.",
+        "tr": "CGLS-LC100 zaman serisi 2015'ten başlar — 2000 baz yılı mevcut değildir."
+      }
+    },
+    {
+      "category": {
+        "en": "Data",
+        "ru": "Данные",
+        "tr": "Veri"
+      },
+      "question": {
+        "en": "What is the approximate file size of a full CORINE European mosaic?",
+        "ru": "Каков примерный размер полной европейской мозаики CORINE?",
+        "tr": "Tam bir CORINE Avrupa mozaiğinin yaklaşık dosya boyutu nedir?"
+      },
+      "options": {
+        "en": [
+          "~4 GB",
+          "~50 MB",
+          "~500 MB",
+          "~20 GB"
+        ],
+        "ru": [
+          "~4 ГБ",
+          "~50 МБ",
+          "~500 МБ",
+          "~20 ГБ"
+        ],
+        "tr": [
+          "~4 GB",
+          "~50 MB",
+          "~500 MB",
+          "~20 GB"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "The full CORINE mosaic is approximately 4 GB — the trainer may provide pre-clipped files.",
+        "ru": "Полная мозаика CORINE — примерно 4 ГБ. Тренер может предоставить обрезанные файлы.",
+        "tr": "Tam CORINE mozaiği yaklaşık 4 GB'dir — eğitmen önceden kırpılmış dosyalar sağlayabilir."
+      }
+    },
+    {
+      "category": {
+        "en": "Trends.Earth",
+        "ru": "Trends.Earth",
+        "tr": "Trends.Earth"
+      },
+      "question": {
+        "en": "Where do you add a basemap in QGIS for interpreting Trends.Earth results?",
+        "ru": "Где добавить базовую карту в QGIS для интерпретации результатов?",
+        "tr": "Trends.Earth sonuçlarını yorumlamak için QGIS'te altlık harita nereden eklenir?"
+      },
+      "options": {
+        "en": [
+          "Web → QuickMapServices → Google Satellite",
+          "Plugins → Basemap Loader",
+          "Layer → Add WMS",
+          "Settings → Map Background"
+        ],
+        "ru": [
+          "Web → QuickMapServices → Google Satellite",
+          "Модули → Загрузчик базовых карт",
+          "Слой → Добавить WMS",
+          "Настройки → Фон карты"
+        ],
+        "tr": [
+          "Web → QuickMapServices → Google Satellite",
+          "Eklentiler → Altlık Harita Yükleyici",
+          "Katman → WMS Ekle",
+          "Ayarlar → Harita Arka Planı"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "Web → QuickMapServices → Google Satellite provides high-resolution imagery for visual interpretation.",
+        "ru": "Web → QuickMapServices → Google Satellite — спутниковые снимки высокого разрешения.",
+        "tr": "Web → QuickMapServices → Google Satellite, görsel yorumlama için yüksek çözünürlüklü görüntü sağlar."
+      }
+    },
+    {
+      "category": {
+        "en": "Acronyms",
+        "ru": "Аббревиатуры",
+        "tr": "Kısaltmalar"
+      },
+      "question": {
+        "en": "What does LDN stand for?",
+        "ru": "Что означает LDN?",
+        "tr": "LDN ne anlama gelir?"
+      },
+      "options": {
+        "en": [
+          "Land Degradation Neutrality",
+          "Low-Density Network",
+          "Land Data Node",
+          "Local Development Nexus"
+        ],
+        "ru": [
+          "Нейтральный баланс деградации земель",
+          "Сеть низкой плотности",
+          "Узел данных о землях",
+          "Местный узел развития"
+        ],
+        "tr": [
+          "Arazi Bozulumu Nötrlüğü",
+          "Düşük Yoğunluklu Ağ",
+          "Arazi Veri Düğümü",
+          "Yerel Kalkınma Bağlantısı"
+        ]
+      },
+      "correct": 0,
+      "points": 10,
+      "explanation": {
+        "en": "LDN = Land Degradation Neutrality, the overarching goal of UNCCD and SDG Target 15.3.",
+        "ru": "LDN = Нейтральный баланс деградации земель — главная цель UNCCD и ЦУР 15.3.",
+        "tr": "LDN = Arazi Bozulumu Nötrlüğü, UNCCD ve SKA Hedef 15.3'ün genel amacı."
+      }
+    },
+    {
+      "category": {
+        "en": "Acronyms",
+        "ru": "Аббревиатуры",
+        "tr": "Kısaltmalar"
+      },
+      "question": {
+        "en": "In PRAIS reporting, what does SO refer to?",
+        "ru": "Что означает SO в отчётности PRAIS?",
+        "tr": "PRAIS raporlamasında SO neyi ifade eder?"
+      },
+      "options": {
+        "en": [
+          "Submission Objective",
+          "Sectoral Output",
+          "Strategic Objective",
+          "Statistical Outcome"
+        ],
+        "ru": [
+          "Цель подачи",
+          "Секторальный результат",
+          "Стратегическая цель",
+          "Статистический результат"
+        ],
+        "tr": [
+          "Sunum Hedefi",
+          "Sektörel Çıktı",
+          "Stratejik Hedef",
+          "İstatistiksel Sonuç"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "SO = Strategic Objective. The UNCCD strategic framework has 5 SOs.",
+        "ru": "SO = Стратегическая цель. Стратегическая рамка UNCCD включает 5 стратегических целей.",
+        "tr": "SO = Stratejik Hedef. UNCCD stratejik çerçevesi 5 stratejik hedef içerir."
+      }
+    },
+    {
+      "category": {
+        "en": "Acronyms",
+        "ru": "Аббревиатуры",
+        "tr": "Kısaltmalar"
+      },
+      "question": {
+        "en": "What does CRIC stand for?",
+        "ru": "Что означает CRIC?",
+        "tr": "CRIC neyin kısaltmasıdır?"
+      },
+      "options": {
+        "en": [
+          "Committee for Reporting and Information Compliance",
+          "Committee for the Review of the Implementation of the Convention",
+          "Council for Research on Impact of Climate",
+          "Commission on Resilience and International Cooperation"
+        ],
+        "ru": [
+          "Комитет по отчётности и соблюдению информации",
+          "Комитет по обзору осуществления Конвенции",
+          "Совет по исследованию климатического воздействия",
+          "Комиссия по устойчивости и международному сотрудничеству"
+        ],
+        "tr": [
+          "Raporlama ve Bilgi Uyumu Komitesi",
+          "Sözleşmenin Uygulanmasının İncelenmesi Komitesi",
+          "İklim Etkisi Araştırma Konseyi",
+          "Dayanıklılık ve Uluslararası İşbirliği Komisyonu"
+        ]
+      },
+      "correct": 1,
+      "points": 10,
+      "explanation": {
+        "en": "CRIC = Committee for the Review of the Implementation of the Convention, a subsidiary body of the UNCCD.",
+        "ru": "CRIC = Комитет по обзору осуществления Конвенции, вспомогательный орган UNCCD.",
+        "tr": "CRIC = Sözleşmenin Uygulanmasının İncelenmesi Komitesi, UNCCD'nin yan kuruluşu."
+      }
+    },
+    {
+      "category": {
+        "en": "Acronyms",
+        "ru": "Аббревиатуры",
+        "tr": "Kısaltmalar"
+      },
+      "question": {
+        "en": "In the PRAIS manual, what does IF refer to?",
+        "ru": "Что означает IF в руководстве PRAIS?",
+        "tr": "PRAIS kılavuzunda IF neyi ifade eder?"
+      },
+      "options": {
+        "en": [
+          "Impact Factor",
+          "International Framework",
+          "Implementation Framework",
+          "Indicator Format"
+        ],
+        "ru": [
+          "Фактор воздействия",
+          "Международная рамка",
+          "Рамка реализации",
+          "Формат индикатора"
+        ],
+        "tr": [
+          "Etki Faktörü",
+          "Uluslararası Çerçeve",
+          "Uygulama Çerçevesi",
+          "Gösterge Formatı"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "IF = Implementation Framework, the structure for organizing UNCCD reporting.",
+        "ru": "IF = Рамка реализации, структура организации отчётности UNCCD.",
+        "tr": "IF = Uygulama Çerçevesi, UNCCD raporlamasını düzenleyen yapı."
+      }
+    },
+    {
+      "category": {
+        "en": "Acronyms",
+        "ru": "Аббревиатуры",
+        "tr": "Kısaltmalar"
+      },
+      "question": {
+        "en": "The acronym DLDD stands for:",
+        "ru": "Аббревиатура DLDD означает:",
+        "tr": "DLDD kısaltması neyi ifade eder?"
+      },
+      "options": {
+        "en": [
+          "Dryland Land Development and Deforestation",
+          "Desert Loss and Drought Damage",
+          "Desertification, Land Degradation and Drought",
+          "Drought-Land Degradation Dataset"
+        ],
+        "ru": [
+          "Развитие засушливых земель и обезлесение",
+          "Потеря пустынь и ущерб от засухи",
+          "Опустынивание, деградация земель и засуха",
+          "Набор данных засуха-деградация"
+        ],
+        "tr": [
+          "Kurak Arazi Geliştirme ve Ormansızlaştırma",
+          "Çöl Kaybı ve Kuraklık Hasarı",
+          "Çölleşme, Arazi Bozulması ve Kuraklık",
+          "Kuraklık-Arazi Bozulması Veri Seti"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "DLDD = Desertification, Land Degradation and Drought — the three main issues addressed by the UNCCD.",
+        "ru": "DLDD = Опустынивание, деградация земель и засуха — три основные проблемы UNCCD.",
+        "tr": "DLDD = Çölleşme, Arazi Bozulması ve Kuraklık — UNCCD'nin ele aldığı üç ana sorun."
+      }
+    },
+    {
+      "category": {
+        "en": "Earth Observation",
+        "ru": "Дистанционное зондирование",
+        "tr": "Uzaktan Algılama"
+      },
+      "question": {
+        "en": "What does NDVI stand for?",
+        "ru": "Что означает NDVI?",
+        "tr": "NDVI neyin kısaltmasıdır?"
+      },
+      "options": {
+        "en": [
+          "National Drought Vulnerability Index",
+          "Normalized Degradation Value Indicator",
+          "Normalized Difference Vegetation Index",
+          "National Desertification Vegetation Index"
+        ],
+        "ru": [
+          "Национальный индекс уязвимости к засухе",
+          "Нормализованный индикатор деградации",
+          "Нормализованный разностный вегетационный индекс",
+          "Национальный индекс растительности опустынивания"
+        ],
+        "tr": [
+          "Ulusal Kuraklık Kırılganlık Endeksi",
+          "Normalize Bozulma Değer Göstergesi",
+          "Normalize Edilmiş Fark Bitki Örtüsü İndeksi",
+          "Ulusal Çölleşme Bitki Örtüsü İndeksi"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "NDVI = Normalized Difference Vegetation Index, calculated from satellite red and near-infrared bands.",
+        "ru": "NDVI = Нормализованный разностный вегетационный индекс, рассчитывается по красному и ближнему ИК каналам спутника.",
+        "tr": "NDVI = Normalize Edilmiş Fark Bitki Örtüsü İndeksi, uydu kırmızı ve yakın kızılötesi bantlarından hesaplanır."
+      }
+    },
+    {
+      "category": {
+        "en": "Earth Observation",
+        "ru": "Дистанционное зондирование",
+        "tr": "Uzaktan Algılama"
+      },
+      "question": {
+        "en": "In PRAIS default data, NDVI is primarily used to assess which component of SDG 15.3.1?",
+        "ru": "В данных PRAIS по умолчанию, NDVI используется для оценки какого компонента ЦУР 15.3.1?",
+        "tr": "PRAIS varsayılan verilerinde NDVI, SKA 15.3.1'in hangi bileşenini değerlendirmek için kullanılır?"
+      },
+      "options": {
+        "en": [
+          "Land cover change",
+          "Land productivity",
+          "Carbon stock variation",
+          "Population exposure"
+        ],
+        "ru": [
+          "Изменение земельного покрова",
+          "Продуктивность земель",
+          "Изменение запасов углерода",
+          "Подверженность населения"
+        ],
+        "tr": [
+          "Arazi örtüsü değişimi",
+          "Arazi verimliliği",
+          "Karbon stoku değişimi",
+          "Nüfus maruziyeti"
+        ]
+      },
+      "correct": 1,
+      "points": 10,
+      "explanation": {
+        "en": "NDVI time series are used to derive Land Productivity Dynamics (LPD), the SO1-2 sub-indicator.",
+        "ru": "Временные ряды NDVI используются для расчёта динамики продуктивности земель (LPD), субиндикатор SO1-2.",
+        "tr": "NDVI zaman serileri, SO1-2 alt göstergesi olan Arazi Verimlilik Dinamikleri (LPD) hesaplamak için kullanılır."
+      }
+    },
+    {
+      "category": {
+        "en": "Acronyms",
+        "ru": "Аббревиатуры",
+        "tr": "Kısaltmalar"
+      },
+      "question": {
+        "en": "In Annex I of the PRAIS manual, what does USL stand for?",
+        "ru": "Что означает USL в Приложении I руководства PRAIS?",
+        "tr": "PRAIS kılavuzunun Ek I'inde USL neyi ifade eder?"
+      },
+      "options": {
+        "en": [
+          "Unified Sharing License",
+          "User Standard License",
+          "User-Specific Licence",
+          "UN Secretariat License"
+        ],
+        "ru": [
+          "Единая лицензия обмена",
+          "Пользовательская стандартная лицензия",
+          "Лицензия для конкретного пользователя",
+          "Лицензия Секретариата ООН"
+        ],
+        "tr": [
+          "Birleşik Paylaşım Lisansı",
+          "Kullanıcı Standart Lisansı",
+          "Kullanıcıya Özel Lisans",
+          "BM Sekreterya Lisansı"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "USL = User-Specific Licence, governing access to certain datasets in PRAIS.",
+        "ru": "USL = Лицензия для конкретного пользователя, регулирующая доступ к определённым наборам данных в PRAIS.",
+        "tr": "USL = Kullanıcıya Özel Lisans, PRAIS'teki belirli veri setlerine erişimi düzenler."
+      }
+    },
+    {
+      "category": {
+        "en": "SO1 Indicators",
+        "ru": "Индикаторы SO1",
+        "tr": "SO1 Göstergeleri"
+      },
+      "question": {
+        "en": "In SO1-2 (Land Productivity), what does the trend metric describe?",
+        "ru": "В SO1-2 (Продуктивность земель), что описывает метрика тренда?",
+        "tr": "SO1-2'de (Arazi Verimliliği) trend metriği neyi tanımlar?"
+      },
+      "options": {
+        "en": [
+          "Mean NDVI in a single year",
+          "The long-term direction of change in land productivity over time",
+          "Seasonal vegetation variability",
+          "Difference between national and global averages"
+        ],
+        "ru": [
+          "Среднее NDVI за один год",
+          "Долгосрочное направление изменения продуктивности земель",
+          "Сезонная изменчивость растительности",
+          "Разница между национальным и глобальным средними"
+        ],
+        "tr": [
+          "Tek bir yıldaki ortalama NDVI",
+          "Arazi verimliliğindeki uzun vadeli değişim yönü",
+          "Mevsimsel bitki örtüsü değişkenliği",
+          "Ulusal ve küresel ortalamalar arasındaki fark"
+        ]
+      },
+      "correct": 1,
+      "points": 10,
+      "explanation": {
+        "en": "The trend metric captures the long-term direction (increasing, stable, or decreasing) of land productivity.",
+        "ru": "Метрика тренда отражает долгосрочное направление (рост, стабильность или снижение) продуктивности земель.",
+        "tr": "Trend metriği, arazi verimliliğinin uzun vadeli yönünü (artış, kararlılık veya azalış) yakalar."
+      }
+    },
+    {
+      "category": {
+        "en": "SO1 Indicators",
+        "ru": "Индикаторы SO1",
+        "tr": "SO1 Göstergeleri"
+      },
+      "question": {
+        "en": "How is LPD (Land Productivity Dynamics) primarily derived in PRAIS?",
+        "ru": "Как рассчитывается LPD (Динамика продуктивности земель) в PRAIS?",
+        "tr": "PRAIS'te LPD (Arazi Verimlilik Dinamikleri) nasıl hesaplanır?"
+      },
+      "options": {
+        "en": [
+          "From rainfall time series",
+          "From soil carbon inventories",
+          "From time series of a vegetation index (e.g. NDVI)",
+          "From land cover transitions"
+        ],
+        "ru": [
+          "Из временных рядов осадков",
+          "Из инвентаризации углерода в почве",
+          "Из временных рядов вегетационного индекса (напр. NDVI)",
+          "Из переходов земельного покрова"
+        ],
+        "tr": [
+          "Yağış zaman serilerinden",
+          "Toprak karbon envanterlerinden",
+          "Bir bitki örtüsü indeksinin zaman serilerinden (ör. NDVI)",
+          "Arazi örtüsü geçişlerinden"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "LPD is derived from NDVI (or similar vegetation index) time series analysis.",
+        "ru": "LPD рассчитывается из анализа временных рядов NDVI (или аналогичного индекса).",
+        "tr": "LPD, NDVI (veya benzer bitki örtüsü indeksi) zaman serisi analizinden elde edilir."
+      }
+    },
+    {
+      "category": {
+        "en": "SO1 Indicators",
+        "ru": "Индикаторы SO1",
+        "tr": "SO1 Göstergeleri"
+      },
+      "question": {
+        "en": "Which statement best describes SO1-1 (Trends in land cover)?",
+        "ru": "Какое утверждение лучше описывает SO1-1 (Тенденции земельного покрова)?",
+        "tr": "SO1-1'i (Arazi örtüsündeki eğilimler) en iyi hangi ifade tanımlar?"
+      },
+      "options": {
+        "en": [
+          "Changes in vegetation greenness",
+          "Transitions between land cover classes indicating degradation, improvement, or stability",
+          "Changes in biomass productivity",
+          "Changes in soil organic carbon only"
+        ],
+        "ru": [
+          "Изменения зелёности растительности",
+          "Переходы между классами покрова, указывающие на деградацию, улучшение или стабильность",
+          "Изменения продуктивности биомассы",
+          "Только изменения органического углерода в почве"
+        ],
+        "tr": [
+          "Bitki örtüsü yeşilliğindeki değişimler",
+          "Bozulma, iyileşme veya kararlılığı gösteren arazi örtüsü sınıfları arası geçişler",
+          "Biyokütle verimliliğindeki değişimler",
+          "Yalnızca toprak organik karbonundaki değişimler"
+        ]
+      },
+      "correct": 1,
+      "points": 10,
+      "explanation": {
+        "en": "SO1-1 tracks transitions between land cover classes over time, classifying them as degradation, improvement, or stability.",
+        "ru": "SO1-1 отслеживает переходы между классами земельного покрова, классифицируя их как деградацию, улучшение или стабильность.",
+        "tr": "SO1-1, arazi örtüsü sınıfları arasındaki geçişleri izler ve bunları bozulma, iyileşme veya kararlılık olarak sınıflandırır."
+      }
+    },
+    {
+      "category": {
+        "en": "SO1 Indicators",
+        "ru": "Индикаторы SO1",
+        "tr": "SO1 Göstergeleri"
+      },
+      "question": {
+        "en": "For SO1-3 (Carbon stocks above and below ground), what is the primary metric used in SDG 15.3.1?",
+        "ru": "Для SO1-3 (Запасы углерода), какой основной показатель используется в ЦУР 15.3.1?",
+        "tr": "SO1-3 (Yerüstü ve yeraltı karbon stokları) için SKA 15.3.1'de kullanılan temel metrik nedir?"
+      },
+      "options": {
+        "en": [
+          "Above-ground biomass only",
+          "Net ecosystem carbon balance",
+          "Soil organic carbon stocks (SOC)",
+          "Annual carbon flux"
+        ],
+        "ru": [
+          "Только надземная биомасса",
+          "Чистый углеродный баланс экосистемы",
+          "Запасы органического углерода в почве (SOC)",
+          "Годовой поток углерода"
+        ],
+        "tr": [
+          "Yalnızca yerüstü biyokütle",
+          "Net ekosistem karbon dengesi",
+          "Toprak organik karbon stokları (SOC)",
+          "Yıllık karbon akışı"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "SOC (Soil Organic Carbon) stocks are the primary metric for the carbon sub-indicator in SDG 15.3.1.",
+        "ru": "Запасы SOC (органический углерод почвы) — основной показатель углеродного субиндикатора ЦУР 15.3.1.",
+        "tr": "SOC (Toprak Organik Karbon) stokları, SKA 15.3.1'deki karbon alt göstergesinin temel metriğidir."
+      }
+    },
+    {
+      "category": {
+        "en": "SO1 Indicators",
+        "ru": "Индикаторы SO1",
+        "tr": "SO1 Göstergeleri"
+      },
+      "question": {
+        "en": "How is land classified as degraded under SDG 15.3.1?",
+        "ru": "Как земля классифицируется как деградированная по ЦУР 15.3.1?",
+        "tr": "SKA 15.3.1 kapsamında arazi nasıl bozulmuş olarak sınıflandırılır?"
+      },
+      "options": {
+        "en": [
+          "All three sub-indicators must decline",
+          "An average score is calculated",
+          "A significant reduction in any one sub-indicator is sufficient",
+          "Only land productivity decline is considered"
+        ],
+        "ru": [
+          "Все три субиндикатора должны снизиться",
+          "Рассчитывается средний балл",
+          "Значительное снижение любого одного субиндикатора достаточно",
+          "Учитывается только снижение продуктивности"
+        ],
+        "tr": [
+          "Üç alt göstergenin tümü düşmelidir",
+          "Ortalama bir puan hesaplanır",
+          "Herhangi bir alt göstergede önemli düşüş yeterlidir",
+          "Yalnızca arazi verimlilik düşüşü dikkate alınır"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "The One-Out All-Out (OOAO) principle: degradation in ANY one sub-indicator classifies the land as degraded.",
+        "ru": "Принцип One-Out All-Out (OOAO): деградация ЛЮБОГО субиндикатора классифицирует землю как деградированную.",
+        "tr": "One-Out All-Out (OOAO) ilkesi: HERHANGİ bir alt göstergede bozulma, araziyi bozulmuş olarak sınıflandırır."
+      }
+    },
+    {
+      "category": {
+        "en": "SO1 Indicators",
+        "ru": "Индикаторы SO1",
+        "tr": "SO1 Göstergeleri"
+      },
+      "question": {
+        "en": "Why is land productivity a key indicator of land degradation?",
+        "ru": "Почему продуктивность земель — ключевой индикатор деградации?",
+        "tr": "Arazi verimliliği neden arazi bozulmasının temel göstergesidir?"
+      },
+      "options": {
+        "en": [
+          "It measures land ownership",
+          "It captures only crop yield",
+          "It reflects the land's capacity to sustain biomass production over time",
+          "It replaces land cover assessment"
+        ],
+        "ru": [
+          "Измеряет собственность на землю",
+          "Учитывает только урожайность",
+          "Отражает способность земли поддерживать производство биомассы",
+          "Заменяет оценку земельного покрова"
+        ],
+        "tr": [
+          "Arazi sahipliğini ölçer",
+          "Yalnızca ürün verimini yakalar",
+          "Arazinin biyokütle üretimini sürdürme kapasitesini yansıtır",
+          "Arazi örtüsü değerlendirmesinin yerini alır"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "Land productivity reflects the biological capacity of land to sustain ecosystem services over time.",
+        "ru": "Продуктивность земель отражает биологическую способность земли поддерживать экосистемные услуги.",
+        "tr": "Arazi verimliliği, arazinin zaman içinde ekosistem hizmetlerini sürdürme biyolojik kapasitesini yansıtır."
+      }
+    },
+    {
+      "category": {
+        "en": "SO2 Indicators",
+        "ru": "Индикаторы SO2",
+        "tr": "SO2 Göstergeleri"
+      },
+      "question": {
+        "en": "Which of the following indicators belongs to Strategic Objective 2 (SO2)?",
+        "ru": "Какой из следующих индикаторов относится к Стратегической цели 2 (SO2)?",
+        "tr": "Aşağıdaki göstergelerden hangisi Stratejik Hedef 2'ye (SO2) aittir?"
+      },
+      "options": {
+        "en": [
+          "SO1-2 Trends in land productivity",
+          "SO2-1 Trends in population living below the relative poverty line",
+          "SO1-3 Trends in carbon stocks",
+          "SO4-2 Trends in species abundance"
+        ],
+        "ru": [
+          "SO1-2 Тенденции продуктивности земель",
+          "SO2-1 Тенденции населения за чертой бедности",
+          "SO1-3 Тенденции запасов углерода",
+          "SO4-2 Тенденции численности видов"
+        ],
+        "tr": [
+          "SO1-2 Arazi verimliliği eğilimleri",
+          "SO2-1 Göreli yoksulluk sınırı altında yaşayan nüfus eğilimleri",
+          "SO1-3 Karbon stoku eğilimleri",
+          "SO4-2 Tür bolluğu eğilimleri"
+        ]
+      },
+      "correct": 1,
+      "points": 10,
+      "explanation": {
+        "en": "SO2 focuses on improving living conditions of affected populations. SO2-1 tracks poverty trends.",
+        "ru": "SO2 направлена на улучшение условий жизни затронутого населения. SO2-1 отслеживает тенденции бедности.",
+        "tr": "SO2, etkilenen nüfusun yaşam koşullarını iyileştirmeye odaklanır. SO2-1 yoksulluk eğilimlerini izler."
+      }
+    },
+    {
+      "category": {
+        "en": "SO4 Indicators",
+        "ru": "Индикаторы SO4",
+        "tr": "SO4 Göstergeleri"
+      },
+      "question": {
+        "en": "Under SO4-2, which index is used to assess trends in species extinction risk?",
+        "ru": "В SO4-2, какой индекс используется для оценки тенденций риска вымирания видов?",
+        "tr": "SO4-2 kapsamında türlerin nesil tükenme riski eğilimlerini değerlendirmek için hangi endeks kullanılır?"
+      },
+      "options": {
+        "en": [
+          "Living Planet Index (LPI)",
+          "Biodiversity Intactness Index (BII)",
+          "Red List Index (RLI)",
+          "Species Richness Index (SRI)"
+        ],
+        "ru": [
+          "Индекс живой планеты (LPI)",
+          "Индекс сохранности биоразнообразия (BII)",
+          "Индекс Красного списка (RLI)",
+          "Индекс видового богатства (SRI)"
+        ],
+        "tr": [
+          "Yaşayan Gezegen Endeksi (LPI)",
+          "Biyoçeşitlilik Bütünlük Endeksi (BII)",
+          "Kırmızı Liste Endeksi (RLI)",
+          "Tür Zenginliği Endeksi (SRI)"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "The Red List Index (RLI) from IUCN is used for SO4-2 to track species extinction risk trends.",
+        "ru": "Индекс Красного списка (RLI) МСОП используется для SO4-2 для отслеживания тенденций риска вымирания.",
+        "tr": "IUCN'nin Kırmızı Liste Endeksi (RLI), SO4-2'de türlerin nesil tükenme riski eğilimlerini izlemek için kullanılır."
+      }
+    },
+    {
+      "category": {
+        "en": "SO4 Indicators",
+        "ru": "Индикаторы SO4",
+        "tr": "SO4 Göstergeleri"
+      },
+      "question": {
+        "en": "What does KBA stand for in SO4-3 (protected area coverage of important biodiversity areas)?",
+        "ru": "Что означает KBA в SO4-3 (покрытие охраняемых территорий важных для биоразнообразия)?",
+        "tr": "SO4-3'te (önemli biyoçeşitlilik alanlarının koruma alanı kapsamı) KBA neyi ifade eder?"
+      },
+      "options": {
+        "en": [
+          "Key Biological Assets",
+          "Known Biodiversity Areas",
+          "Key Biodiversity Areas",
+          "Keystone Biome Areas"
+        ],
+        "ru": [
+          "Ключевые биологические активы",
+          "Известные территории биоразнообразия",
+          "Ключевые территории биоразнообразия",
+          "Ключевые биомные территории"
+        ],
+        "tr": [
+          "Temel Biyolojik Varlıklar",
+          "Bilinen Biyoçeşitlilik Alanları",
+          "Önemli Biyoçeşitlilik Alanları",
+          "Kilit Biyom Alanları"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "KBA = Key Biodiversity Areas, sites contributing significantly to global biodiversity persistence.",
+        "ru": "KBA = Ключевые территории биоразнообразия, участки, важные для сохранения глобального биоразнообразия.",
+        "tr": "KBA = Önemli Biyoçeşitlilik Alanları, küresel biyoçeşitlilik sürdürülebilirliğine önemli katkıda bulunan alanlar."
+      }
+    },
+    {
+      "category": {
+        "en": "SO5 Indicators",
+        "ru": "Индикаторы SO5",
+        "tr": "SO5 Göstergeleri"
+      },
+      "question": {
+        "en": "What is the main focus of Strategic Objective 5 (SO5)?",
+        "ru": "На чём сосредоточена Стратегическая цель 5 (SO5)?",
+        "tr": "Stratejik Hedef 5'in (SO5) ana odağı nedir?"
+      },
+      "options": {
+        "en": [
+          "Monitoring ecosystem condition using EO data",
+          "Assessing drought impacts on populations",
+          "Mobilizing financial and non-financial resources to implement the Convention",
+          "Tracking land productivity trends"
+        ],
+        "ru": [
+          "Мониторинг экосистем с помощью данных ДЗЗ",
+          "Оценка воздействия засухи на население",
+          "Мобилизация финансовых и нефинансовых ресурсов для реализации Конвенции",
+          "Отслеживание тенденций продуктивности"
+        ],
+        "tr": [
+          "Uzaktan algılama verileriyle ekosistem durumu izleme",
+          "Kuraklığın nüfus üzerindeki etkilerini değerlendirme",
+          "Sözleşmenin uygulanması için mali ve mali olmayan kaynakları harekete geçirme",
+          "Arazi verimlilik eğilimlerini izleme"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "SO5 focuses on mobilizing resources — both financial and non-financial — to support UNCCD implementation.",
+        "ru": "SO5 сосредоточена на мобилизации ресурсов для поддержки реализации UNCCD.",
+        "tr": "SO5, UNCCD uygulamasını desteklemek için mali ve mali olmayan kaynakların harekete geçirilmesine odaklanır."
+      }
+    },
+    {
+      "category": {
+        "en": "SO5 Indicators",
+        "ru": "Индикаторы SO5",
+        "tr": "SO5 Göstergeleri"
+      },
+      "question": {
+        "en": "In SO5 reporting, what does ODA stand for?",
+        "ru": "Что означает ODA в отчётности SO5?",
+        "tr": "SO5 raporlamasında ODA neyi ifade eder?"
+      },
+      "options": {
+        "en": [
+          "Official Desertification Assistance",
+          "Overseas Development Allocation",
+          "Official Development Assistance",
+          "Organized Donor Agreements"
+        ],
+        "ru": [
+          "Официальная помощь в борьбе с опустыниванием",
+          "Зарубежное распределение развития",
+          "Официальная помощь развитию",
+          "Организованные донорские соглашения"
+        ],
+        "tr": [
+          "Resmi Çölleşme Yardımı",
+          "Denizaşırı Kalkınma Tahsisi",
+          "Resmi Kalkınma Yardımı",
+          "Organize Bağışçı Anlaşmaları"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "ODA = Official Development Assistance, international aid flows tracked under SO5.",
+        "ru": "ODA = Официальная помощь развитию, международная помощь, отслеживаемая в SO5.",
+        "tr": "ODA = Resmi Kalkınma Yardımı, SO5 kapsamında izlenen uluslararası yardım akışları."
+      }
+    },
+    {
+      "category": {
+        "en": "SO5 Indicators",
+        "ru": "Индикаторы SO5",
+        "tr": "SO5 Göstergeleri"
+      },
+      "question": {
+        "en": "Which indicator reports on international bilateral and multilateral public resources?",
+        "ru": "Какой индикатор отчитывается о международных двусторонних и многосторонних публичных ресурсах?",
+        "tr": "Uluslararası ikili ve çok taraflı kamu kaynaklarını hangi gösterge raporlar?"
+      },
+      "options": {
+        "en": [
+          "SO5-2",
+          "SO5-3",
+          "SO5-1",
+          "SO5-4"
+        ],
+        "ru": [
+          "SO5-2",
+          "SO5-3",
+          "SO5-1",
+          "SO5-4"
+        ],
+        "tr": [
+          "SO5-2",
+          "SO5-3",
+          "SO5-1",
+          "SO5-4"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "SO5-1 covers international bilateral and multilateral public resources (ODA and other official flows).",
+        "ru": "SO5-1 охватывает международные двусторонние и многосторонние публичные ресурсы.",
+        "tr": "SO5-1, uluslararası ikili ve çok taraflı kamu kaynaklarını (ODA ve diğer resmi akışlar) kapsar."
+      }
+    },
+    {
+      "category": {
+        "en": "SO5 Indicators",
+        "ru": "Индикаторы SO5",
+        "tr": "SO5 Göstergeleri"
+      },
+      "question": {
+        "en": "What does SO5-2 measure?",
+        "ru": "Что измеряет SO5-2?",
+        "tr": "SO5-2 neyi ölçer?"
+      },
+      "options": {
+        "en": [
+          "Private sector investment in DLDD",
+          "Technology transfer activities",
+          "Domestic public resources allocated to DLDD-related activities",
+          "Number of international partners"
+        ],
+        "ru": [
+          "Инвестиции частного сектора",
+          "Деятельность по передаче технологий",
+          "Внутренние публичные ресурсы на деятельность по DLDD",
+          "Число международных партнёров"
+        ],
+        "tr": [
+          "DLDD'ye özel sektör yatırımı",
+          "Teknoloji transferi faaliyetleri",
+          "DLDD ile ilgili faaliyetlere ayrılan yurt içi kamu kaynakları",
+          "Uluslararası ortak sayısı"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "SO5-2 tracks domestic public resources (government budgets) allocated to combat DLDD.",
+        "ru": "SO5-2 отслеживает внутренние публичные ресурсы (бюджеты) для борьбы с DLDD.",
+        "tr": "SO5-2, DLDD ile mücadeleye ayrılan yurt içi kamu kaynaklarını (hükümet bütçeleri) izler."
+      }
+    },
+    {
+      "category": {
+        "en": "SO5 Indicators",
+        "ru": "Индикаторы SO5",
+        "tr": "SO5 Göstergeleri"
+      },
+      "question": {
+        "en": "In the SO5 framework, SO5-3 focuses on:",
+        "ru": "В рамках SO5, SO5-3 сосредоточен на:",
+        "tr": "SO5 çerçevesinde SO5-3 şuna odaklanır:"
+      },
+      "options": {
+        "en": [
+          "Volume of ODA commitments",
+          "National budget allocations",
+          "International and domestic private resources",
+          "Technology needs assessments"
+        ],
+        "ru": [
+          "Объём обязательств по ODA",
+          "Национальные бюджетные ассигнования",
+          "Международные и внутренние частные ресурсы",
+          "Оценки технологических потребностей"
+        ],
+        "tr": [
+          "ODA taahhüt hacmi",
+          "Ulusal bütçe tahsisleri",
+          "Uluslararası ve yurt içi özel kaynaklar",
+          "Teknoloji ihtiyaç değerlendirmeleri"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "SO5-3 covers international and domestic private resources mobilized to address DLDD.",
+        "ru": "SO5-3 охватывает международные и внутренние частные ресурсы для борьбы с DLDD.",
+        "tr": "SO5-3, DLDD ile mücadele için harekete geçirilen uluslararası ve yurt içi özel kaynakları kapsar."
+      }
+    },
+    {
+      "category": {
+        "en": "SO5 Indicators",
+        "ru": "Индикаторы SO5",
+        "tr": "SO5 Göstergeleri"
+      },
+      "question": {
+        "en": "What does the Tier approach in SO5 reporting allow countries to do?",
+        "ru": "Что позволяет странам подход уровней (Tier) в отчётности SO5?",
+        "tr": "SO5 raporlamasındaki Tier yaklaşımı ülkelere ne yapmalarına olanak tanır?"
+      },
+      "options": {
+        "en": [
+          "Report only when full quantitative data exist",
+          "Skip SO5 reporting",
+          "Use qualitative and descriptive information when detailed financial data are unavailable",
+          "Replace national data with default global datasets"
+        ],
+        "ru": [
+          "Отчитываться только при наличии полных данных",
+          "Пропускать отчётность SO5",
+          "Использовать качественную информацию при отсутствии детальных данных",
+          "Заменять национальные данные глобальными"
+        ],
+        "tr": [
+          "Yalnızca tam sayısal veri olduğunda raporlama",
+          "SO5 raporlamasını atlama",
+          "Ayrıntılı mali veriler olmadığında niteliksel ve tanımlayıcı bilgi kullanma",
+          "Ulusal verileri varsayılan küresel veri setleriyle değiştirme"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "The Tier approach lets countries start with qualitative descriptions and progressively add quantitative data as capacity grows.",
+        "ru": "Подход уровней позволяет начать с качественных описаний и постепенно добавлять количественные данные.",
+        "tr": "Tier yaklaşımı, ülkelerin niteliksel tanımlarla başlamasına ve kapasite arttıkça sayısal veri eklemesine olanak tanır."
+      }
+    },
+    {
+      "category": {
+        "en": "SO5 Indicators",
+        "ru": "Индикаторы SO5",
+        "tr": "SO5 Göstergeleri"
+      },
+      "question": {
+        "en": "Which SO5 indicator addresses technology transfer?",
+        "ru": "Какой индикатор SO5 касается передачи технологий?",
+        "tr": "Hangi SO5 göstergesi teknoloji transferini ele alır?"
+      },
+      "options": {
+        "en": [
+          "SO5-1",
+          "SO5-2",
+          "SO5-3",
+          "SO5-4"
+        ],
+        "ru": [
+          "SO5-1",
+          "SO5-2",
+          "SO5-3",
+          "SO5-4"
+        ],
+        "tr": [
+          "SO5-1",
+          "SO5-2",
+          "SO5-3",
+          "SO5-4"
+        ]
+      },
+      "correct": 3,
+      "points": 10,
+      "explanation": {
+        "en": "SO5-4 covers technology transfer and science-technology cooperation for DLDD.",
+        "ru": "SO5-4 охватывает передачу технологий и научно-техническое сотрудничество по DLDD.",
+        "tr": "SO5-4, DLDD için teknoloji transferini ve bilimsel-teknolojik işbirliğini kapsar."
+      }
+    },
+    {
+      "category": {
+        "en": "Voluntary Targets",
+        "ru": "Добровольные цели",
+        "tr": "Gönüllü Hedefler"
+      },
+      "question": {
+        "en": "What is the purpose of the Additional Indicators reporting form in PRAIS?",
+        "ru": "Какова цель формы дополнительных индикаторов в PRAIS?",
+        "tr": "PRAIS'teki Ek Göstergeler raporlama formunun amacı nedir?"
+      },
+      "options": {
+        "en": [
+          "To replace the core UNCCD indicators",
+          "To report drought indicators",
+          "To allow countries to report nationally relevant indicators beyond the core framework",
+          "To validate default global datasets"
+        ],
+        "ru": [
+          "Заменить основные индикаторы UNCCD",
+          "Сообщать о показателях засухи",
+          "Позволить странам отчитываться по национально значимым индикаторам",
+          "Проверять глобальные наборы данных"
+        ],
+        "tr": [
+          "Temel UNCCD göstergelerini değiştirmek",
+          "Kuraklık göstergelerini raporlamak",
+          "Ülkelerin temel çerçeve dışındaki ulusal düzeyde ilgili göstergeleri raporlamasına olanak tanımak",
+          "Varsayılan küresel veri setlerini doğrulamak"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "Additional Indicators let countries report nationally relevant metrics beyond the mandatory UNCCD framework.",
+        "ru": "Дополнительные индикаторы позволяют странам отчитываться по национально значимым показателям.",
+        "tr": "Ek Göstergeler, ülkelerin zorunlu UNCCD çerçevesinin ötesinde ulusal düzeyde ilgili metrikleri raporlamasına olanak tanır."
+      }
+    },
+    {
+      "category": {
+        "en": "Voluntary Targets",
+        "ru": "Добровольные цели",
+        "tr": "Gönüllü Hedefler"
+      },
+      "question": {
+        "en": "Are Additional Indicators mandatory in PRAIS?",
+        "ru": "Являются ли дополнительные индикаторы обязательными в PRAIS?",
+        "tr": "Ek Göstergeler PRAIS'te zorunlu mu?"
+      },
+      "options": {
+        "en": [
+          "Yes, for all Parties",
+          "Yes, for LDN countries only",
+          "No, they are voluntary",
+          "Only when default data are rejected"
+        ],
+        "ru": [
+          "Да, для всех Сторон",
+          "Да, только для стран НДЗ",
+          "Нет, они добровольные",
+          "Только при отклонении данных по умолчанию"
+        ],
+        "tr": [
+          "Evet, tüm Taraflar için",
+          "Evet, yalnızca AKN ülkeleri için",
+          "Hayır, gönüllüdür",
+          "Yalnızca varsayılan veriler reddedildiğinde"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "Additional Indicators are voluntary — countries choose whether and what to report.",
+        "ru": "Дополнительные индикаторы добровольны — страны сами решают, что сообщать.",
+        "tr": "Ek Göstergeler gönüllüdür — ülkeler ne raporlayacaklarına kendileri karar verir."
+      }
+    },
+    {
+      "category": {
+        "en": "Voluntary Targets",
+        "ru": "Добровольные цели",
+        "tr": "Gönüllü Hedefler"
+      },
+      "question": {
+        "en": "What is the primary purpose of reporting Voluntary Targets (VTs) in PRAIS?",
+        "ru": "Какова основная цель отчётности по добровольным целям (VT) в PRAIS?",
+        "tr": "PRAIS'te Gönüllü Hedeflerin (VT) raporlanmasının temel amacı nedir?"
+      },
+      "options": {
+        "en": [
+          "To redefine SDG 15.3.1",
+          "To report financial commitments under SO5",
+          "To express nationally defined ambitions across Strategic Objectives (SO1-SO4)",
+          "To replace the core UNCCD indicators"
+        ],
+        "ru": [
+          "Переопределить ЦУР 15.3.1",
+          "Сообщать о финансовых обязательствах SO5",
+          "Выразить национально определённые амбиции по стратегическим целям (SO1-SO4)",
+          "Заменить основные индикаторы UNCCD"
+        ],
+        "tr": [
+          "SKA 15.3.1'i yeniden tanımlamak",
+          "SO5 kapsamında mali taahhütleri raporlamak",
+          "Stratejik Hedefler (SO1-SO4) genelinde ulusal düzeyde tanımlanmış hedefleri ifade etmek",
+          "Temel UNCCD göstergelerini değiştirmek"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "Voluntary Targets express country-specific ambitions for achieving LDN across SO1-SO4.",
+        "ru": "Добровольные цели выражают национальные амбиции по достижению НДЗ в рамках SO1-SO4.",
+        "tr": "Gönüllü Hedefler, SO1-SO4 genelinde AKN'ye ulaşmak için ülkeye özgü hedefleri ifade eder."
+      }
+    },
+    {
+      "category": {
+        "en": "Voluntary Targets",
+        "ru": "Добровольные цели",
+        "tr": "Gönüllü Hedefler"
+      },
+      "question": {
+        "en": "Which characteristics are expected of Voluntary Targets?",
+        "ru": "Какие характеристики ожидаются от добровольных целей?",
+        "tr": "Gönüllü Hedeflerden hangi özellikler beklenir?"
+      },
+      "options": {
+        "en": [
+          "Qualitative and narrative only",
+          "National-level, non-spatial statements",
+          "Specific, measurable, spatially explicit and time-bound",
+          "Identical across all countries"
+        ],
+        "ru": [
+          "Только качественные и описательные",
+          "Национальные, непространственные заявления",
+          "Конкретные, измеримые, пространственно определённые и ограниченные по времени",
+          "Одинаковые для всех стран"
+        ],
+        "tr": [
+          "Yalnızca niteliksel ve anlatısal",
+          "Ulusal düzeyde, mekansal olmayan ifadeler",
+          "Belirli, ölçülebilir, mekansal olarak açık ve zamana bağlı",
+          "Tüm ülkelerde aynı"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "VTs should be SMART-like: specific, measurable, spatially explicit, and time-bound.",
+        "ru": "VT должны быть SMART: конкретные, измеримые, пространственно определённые и ограниченные по времени.",
+        "tr": "VT'ler SMART benzeri olmalıdır: belirli, ölçülebilir, mekansal olarak açık ve zamana bağlı."
+      }
+    },
+    {
+      "category": {
+        "en": "Voluntary Targets",
+        "ru": "Добровольные цели",
+        "tr": "Gönüllü Hedefler"
+      },
+      "question": {
+        "en": "In PRAIS, for which Strategic Objective can Voluntary Targets be reported using spatial data?",
+        "ru": "В PRAIS, для какой Стратегической цели можно отчитываться по VT с использованием пространственных данных?",
+        "tr": "PRAIS'te Gönüllü Hedefler hangi Stratejik Hedef için mekansal verilerle raporlanabilir?"
+      },
+      "options": {
+        "en": [
+          "For all Strategic Objectives (SO1-SO4)",
+          "For SO2 and SO4 only",
+          "For Strategic Objective 1 (SO1) only",
+          "Spatial data are not allowed for Voluntary Targets"
+        ],
+        "ru": [
+          "Для всех стратегических целей (SO1-SO4)",
+          "Только для SO2 и SO4",
+          "Только для Стратегической цели 1 (SO1)",
+          "Пространственные данные не допускаются для VT"
+        ],
+        "tr": [
+          "Tüm Stratejik Hedefler için (SO1-SO4)",
+          "Yalnızca SO2 ve SO4 için",
+          "Yalnızca Stratejik Hedef 1 (SO1) için",
+          "Gönüllü Hedefler için mekansal verilere izin verilmez"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "Only SO1 Voluntary Targets can use spatial data (polygons/shapefiles) for reporting.",
+        "ru": "Только VT по SO1 могут использовать пространственные данные (полигоны/шейп-файлы).",
+        "tr": "Yalnızca SO1 Gönüllü Hedefleri raporlama için mekansal veri (poligon/shapefile) kullanabilir."
+      }
+    },
+    {
+      "category": {
+        "en": "Voluntary Targets",
+        "ru": "Добровольные цели",
+        "tr": "Gönüllü Hedefler"
+      },
+      "question": {
+        "en": "When reporting Voluntary Targets in PRAIS, how should countries address synergies with the SDGs?",
+        "ru": "При отчётности по VT в PRAIS, как страны должны учитывать синергию с ЦУР?",
+        "tr": "PRAIS'te Gönüllü Hedefleri raporlarken ülkeler SKA'larla sinerjileri nasıl ele almalıdır?"
+      },
+      "options": {
+        "en": [
+          "By reporting only SDG 15.3.1",
+          "By mapping VTs exclusively to climate-related SDGs",
+          "By explaining how the VT contributes to relevant SDGs and ranking the relevance",
+          "By replacing SDG indicators with UNCCD indicators"
+        ],
+        "ru": [
+          "Сообщая только о ЦУР 15.3.1",
+          "Связывая VT исключительно с климатическими ЦУР",
+          "Объясняя вклад VT в соответствующие ЦУР и ранжируя релевантность",
+          "Заменяя индикаторы ЦУР индикаторами UNCCD"
+        ],
+        "tr": [
+          "Yalnızca SKA 15.3.1'i raporlayarak",
+          "VT'leri yalnızca iklimle ilgili SKA'larla eşleyerek",
+          "VT'nin ilgili SKA'lara nasıl katkıda bulunduğunu açıklayarak ve ilgililik sıralaması yaparak",
+          "SKA göstergelerini UNCCD göstergeleriyle değiştirerek"
+        ]
+      },
+      "correct": 2,
+      "points": 10,
+      "explanation": {
+        "en": "Countries should explain how each VT contributes to relevant SDGs and rank the relevance of those SDGs.",
+        "ru": "Страны должны объяснить вклад каждой VT в соответствующие ЦУР и ранжировать их релевантность.",
+        "tr": "Ülkeler, her VT'nin ilgili SKA'lara nasıl katkıda bulunduğunu açıklamalı ve bu SKA'ların ilgililiğini sıralamalıdır."
+      }
+    }
+  ]
+}

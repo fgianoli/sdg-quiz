@@ -196,6 +196,11 @@ function handleMsg(msg) {
         const rank = msg.buzzOrder.indexOf(myBuzz) + 1;
         myRank = rank;
         document.getElementById('buzzRank').innerHTML = '<span class="rank-num">#' + rank + '</span><br>' + (rank === 1 ? 'First!' : 'in line');
+      } else if (msg.maxBuzzers && msg.buzzedCount >= msg.maxBuzzers && !hasBuzzed) {
+        // Queue is full, disable buzzer
+        const bb = document.getElementById('buzzerBtn');
+        bb.className = 'buzzer-big disabled';
+        bb.textContent = 'QUEUE FULL';
       }
       break;
     }
@@ -205,6 +210,15 @@ function handleMsg(msg) {
         const b = document.getElementById('buzzerBtn');
         b.className = 'buzzer-big disabled';
         b.textContent = msg.teamName + ' buzzed';
+      }
+      break;
+
+    case 'answer-result':
+      // Show feedback if it was our answer
+      if (msg.teamName === myName) {
+        const ab = document.getElementById('buzzerBtn');
+        if (msg.isCorrect) { ab.className = 'buzzer-big correct-flash'; ab.textContent = 'CORRECT!'; }
+        else { ab.className = 'buzzer-big wrong-flash'; ab.textContent = 'WRONG'; }
       }
       break;
 

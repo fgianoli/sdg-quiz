@@ -46,6 +46,7 @@ let buzzStart = 0;
 let buzzTimer = null;
 let secondLang = 'ru';
 let idCounter = 0;
+let usedAnswers = [];  // indices of wrong answers already given
 
 // 15 distinct team colors
 const COLORS = [
@@ -113,33 +114,60 @@ wss.on('connection', (ws) => {
         setTimeout(() => advanceQuestion(), 3000);
         break;
 
-      case 'mark-correct':
+      case 'select-answer':
         if (phase !== 'answering' || buzzOrder.length === 0) break;
-        const winner = buzzOrder[0];
-        if (teams[winner.teamId]) {
-          teams[winner.teamId].score += questions[currentQ].points;
-        }
-        phase = 'reveal';
-        clearBuzzTimer();
-        broadcastReveal(teams[winner.teamId]?.name, true);
-        break;
+        const selectedIdx = parseInt(msg.index);
+        if (isNaN(selectedIdx) || selectedIdx < 0) break;
+        if (usedAnswers.includes(selectedIdx)) break; // already tried this answer
+        const correctIdx = questions[currentQ].correct;
+        const answerer = buzzOrder[0];
 
-      case 'mark-wrong':
-        if (phase !== 'answering') break;
-        buzzOrder.shift();
-        if (buzzOrder.length > 0) {
-          // Pass to next team in queue
-          phase = 'answering';
+        if (selectedIdx === correctIdx) {
+          // Correct answer!
+          if (teams[answerer.teamId]) {
+            teams[answerer.teamId].score += questions[currentQ].points;
+          }
+          phase = 'reveal';
+          clearBuzzTimer();
           broadcast({
-            type: 'wrong-pass',
-            buzzOrder: buzzOrderPublic(),
-            nextTeam: teams[buzzOrder[0].teamId]?.name,
-            nextColor: teams[buzzOrder[0].teamId]?.color
+            type: 'answer-result',
+            selectedIndex: selectedIdx,
+            isCorrect: true,
+            teamName: teams[answerer.teamId]?.name,
+            teamColor: teams[answerer.teamId]?.color
           });
+          setTimeout(() => broadcastReveal(teams[answerer.teamId]?.name, true), 1500);
         } else {
-          // Everyone who buzzed got it wrong
-          phase = 'all-wrong';
-          broadcast({ type: 'all-wrong' });
+          // Wrong answer — track it, show which was selected, then pass to next
+          usedAnswers.push(selectedIdx);
+          broadcast({
+            type: 'answer-result',
+            selectedIndex: selectedIdx,
+            isCorrect: false,
+            teamName: teams[answerer.teamId]?.name,
+            teamColor: teams[answerer.teamId]?.color,
+            usedAnswers: [...usedAnswers]
+          });
+          buzzOrder.shift();
+          if (buzzOrder.length > 0) {
+            // Pass to next team in queue after a brief delay
+            setTimeout(() => {
+              phase = 'answering';
+              broadcast({
+                type: 'wrong-pass',
+                buzzOrder: buzzOrderPublic(),
+                nextTeam: teams[buzzOrder[0].teamId]?.name,
+                nextColor: teams[buzzOrder[0].teamId]?.color,
+                usedAnswers: [...usedAnswers]
+              });
+            }, 1500);
+          } else {
+            // Everyone who buzzed got it wrong
+            setTimeout(() => {
+              phase = 'all-wrong';
+              broadcast({ type: 'all-wrong' });
+            }, 1500);
+          }
         }
         break;
 
@@ -207,9 +235,12 @@ wss.on('connection', (ws) => {
         break;
       }
 
-      case 'buzz':
+      case 'buzz': {
         if (phase !== 'buzzing' || !ws.teamId || !teams[ws.teamId]) break;
         if (buzzOrder.find(b => b.teamId === ws.teamId)) break; // already buzzed
+        // Cap buzz queue at number of options (max 4 chances)
+        const maxBuzzers = questions[currentQ]?.options?.en?.length || 4;
+        if (buzzOrder.length >= maxBuzzers) break;
         const ms = Date.now() - buzzStart;
         buzzOrder.push({ teamId: ws.teamId, ms });
 
@@ -218,7 +249,8 @@ wss.on('connection', (ws) => {
           type: 'buzz-update',
           buzzOrder: buzzOrderPublic(),
           totalTeams: Object.keys(teams).length,
-          buzzedCount: buzzOrder.length
+          buzzedCount: buzzOrder.length,
+          maxBuzzers
         });
 
         // First buzz → start answering phase
@@ -231,6 +263,7 @@ wss.on('connection', (ws) => {
           });
         }
         break;
+      }
     }
   });
 
@@ -251,10 +284,12 @@ function advanceQuestion() {
     return;
   }
   buzzOrder = [];
+  usedAnswers = [];
   buzzStart = Date.now();
   phase = 'buzzing';
   const q = questions[currentQ];
-  broadcast({
+  // Send question to players (without correct answer)
+  broadcastPlayers({
     type: 'question',
     num: currentQ + 1,
     total: questions.length,
@@ -262,6 +297,19 @@ function advanceQuestion() {
     options: q.options,
     category: q.category,
     points: q.points,
+    secondLang,
+    teams: getTeamsPublic()
+  });
+  // Send question to admin (with correct index for click-to-verify)
+  broadcastAdmin({
+    type: 'question',
+    num: currentQ + 1,
+    total: questions.length,
+    question: q.question,
+    options: q.options,
+    category: q.category,
+    points: q.points,
+    correct: q.correct,
     secondLang,
     teams: getTeamsPublic()
   });
@@ -318,7 +366,7 @@ function sendState(ws) {
     currentQ,
     questions: questions.map(q => ({
       question: q.question, options: q.options, category: q.category,
-      points: q.points, explanation: q.explanation
+      points: q.points, explanation: q.explanation, correct: q.correct
     })),
     buzzOrder: buzzOrderPublic(),
     secondLang,

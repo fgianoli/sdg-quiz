@@ -33,8 +33,7 @@
   .q-category{display:inline-block;padding:3px 10px;border-radius:10px;font-size:.7em;font-weight:700;background:#ede7f6;color:var(--purple);border:1px solid #ce93d8;margin:4px 0}
   .q-text{font-size:1.25em;font-weight:700;line-height:1.35;margin:8px 0;color:#1a1a2e}
   .q-text-secondary{font-size:.95em;line-height:1.4;margin-bottom:10px}
-  .q-lang-ru{color:#1565c0;font-weight:600}
-  .q-lang-tr{color:#c62828;font-weight:600}
+  .q-lang-fr{color:#1565c0;font-weight:600}
   .q-lang-inline{display:flex;gap:16px;flex-wrap:wrap}
   .q-options{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .q-option{padding:14px 16px;border-radius:12px;border:2px solid var(--border);font-size:1.05em;display:flex;align-items:flex-start;gap:12px;transition:all .2s;background:#fafafa}
@@ -47,7 +46,7 @@
   .q-option.wrong-highlight .letter{background:var(--red);color:#fff}
   .click-hint{text-align:center;padding:6px;font-size:.8em;color:#1565c0;font-weight:700;margin-bottom:6px;background:#e3f2fd;border-radius:8px;border:1px dashed #90caf9;grid-column:1/-1}
   .q-option .opt-translations{margin-top:4px;font-size:.85em;line-height:1.4}
-  .q-option .opt-translations .q-lang-ru,.q-option .opt-translations .q-lang-tr{display:inline}
+  .q-option .opt-translations .q-lang-fr{display:inline}
   .q-points{font-size:.8em;color:var(--orange);font-weight:700;margin-top:4px}
   .q-explanation{margin-top:10px;padding:12px;border-radius:10px;background:#e3f2fd;border:1px solid #90caf9;font-size:.9em;color:#1a1a2e;line-height:1.5}
 
@@ -318,19 +317,16 @@ function renderQuestion() {
   document.getElementById('qPts').textContent = q.points + ' points';
   document.getElementById('qText').textContent = q.question?.en || q.question || '';
 
-  // Both RU and TR translations — large and readable
-  const qRu = q.question?.ru || '';
-  const qTr = q.question?.tr || '';
+  // French translation
+  const qFr = q.question?.fr || '';
   let secHtml = '<div class="q-lang-inline">';
-  if (qRu) secHtml += '<span class="q-lang-ru">🇷🇺 ' + qRu + '</span>';
-  if (qTr) secHtml += '<span class="q-lang-tr">🇹🇷 ' + qTr + '</span>';
+  if (qFr) secHtml += '<span class="q-lang-fr">🇫🇷 ' + qFr + '</span>';
   secHtml += '</div>';
   document.getElementById('qTextSecondary').innerHTML = secHtml;
 
   const letters = ['A','B','C','D'];
   const opts = q.options?.en || q.options || [];
-  const optsRu = q.options?.ru || [];
-  const optsTr = q.options?.tr || [];
+  const optsFr = q.options?.fr || [];
 
   // Determine if options should be clickable (only during answering phase, no pending result)
   const isClickable = state.phase === 'answering' && !state.lastAnswerResult;
@@ -354,11 +350,9 @@ function renderQuestion() {
     if (isWrongAnswer) cls += ' wrong-highlight';
 
     let trans = '';
-    if (optsRu[i] || optsTr[i]) {
+    if (optsFr[i]) {
       trans = '<div class="opt-translations">';
-      if (optsRu[i]) trans += '<span class="q-lang-ru">🇷🇺 ' + optsRu[i] + '</span>';
-      if (optsRu[i] && optsTr[i]) trans += ' &nbsp; ';
-      if (optsTr[i]) trans += '<span class="q-lang-tr">🇹🇷 ' + optsTr[i] + '</span>';
+      trans += '<span class="q-lang-fr">🇫🇷 ' + optsFr[i] + '</span>';
       trans += '</div>';
     }
 
@@ -381,8 +375,7 @@ function renderQuestion() {
   if (state.phase === 'reveal' && state.revealData) {
     const exp = state.revealData.explanation;
     let html = '<strong>Answer: ' + letters[state.revealData.correct] + '</strong><br><br>' + (exp?.en || exp || '');
-    if (exp?.ru) html += '<br><span class="q-lang-ru">🇷🇺 ' + exp.ru + '</span>';
-    if (exp?.tr) html += '<br><span class="q-lang-tr">🇹🇷 ' + exp.tr + '</span>';
+    if (exp?.fr) html += '<br><span class="q-lang-fr">🇫🇷 ' + exp.fr + '</span>';
     if (state.revealData.winnerName) html += '<br><br><strong style="color:var(--green)">Winner: ' + state.revealData.winnerName + '</strong>';
     if (!state.revealData.isCorrect) html += '<br><span style="color:var(--red);font-weight:600">No one got it right</span>';
     expEl.innerHTML = html; expEl.classList.remove('hide');
